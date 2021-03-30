@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "839465333725",
+    "project_id": "healthiee-dc5ec",
+    "storage_bucket": "healthiee-dc5ec.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:839465333725:android:f7402832d743424188bc34",
+        "android_client_info": {
+          "package_name": "com.lbcc.healthiee"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "839465333725-deltkk9sdnlk8cijji86cfhds7jmve0a.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCLg93kY6Vsm9Ck8ANf3ZGi_lBUFcVt3ew"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "839465333725-deltkk9sdnlk8cijji86cfhds7jmve0a.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
