@@ -31,6 +31,12 @@ class _CreateDocAccountState extends State<CreateDocAccount> {
     });
   }
 
+  void makedef(String fileurl) {
+    setState(() {
+      uploadURL = fileurl;
+    });
+  }
+
   Future uploadFile() async {
     firebase_storage.Reference storageReference = firebase_storage
         .FirebaseStorage.instance
@@ -41,10 +47,8 @@ class _CreateDocAccountState extends State<CreateDocAccount> {
     await uploadTask.whenComplete(() => null);
     print('File Uploaded');
 
-    storageReference.getDownloadURL().then((fileURL) {
-      setState(() {
-        uploadURL = fileURL;
-      });
+    await storageReference.getDownloadURL().then((fileURL) {
+      makedef(fileURL);
     });
   }
 

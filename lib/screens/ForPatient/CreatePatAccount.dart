@@ -33,6 +33,11 @@ class _CreatePatAccountState extends State<CreatePatAccount> {
       }
     });
   }
+  void makedef(String fileurl) {
+    setState(() {
+      uploadURL = fileurl;
+    });
+  }
 
   Future uploadFile() async {
     firebase_storage.Reference storageReference = firebase_storage
@@ -45,9 +50,7 @@ class _CreatePatAccountState extends State<CreatePatAccount> {
     print('File Uploaded');
 
     await storageReference.getDownloadURL().then((fileURL) {
-      setState(() {
-        uploadURL = fileURL;
-      });
+      makedef(fileURL);
     });
   }
 
