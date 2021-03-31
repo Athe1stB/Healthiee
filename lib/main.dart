@@ -17,10 +17,8 @@ void main() {
     runApp(
       MaterialApp(
         theme: defaultAppTheme,
-        home: SafeArea(
-          child: Scaffold(
-            body: Center(child: Loading()),
-          ),
+        home: Scaffold(
+          body: Center(child: Loading()),
         ),
       ),
     );
