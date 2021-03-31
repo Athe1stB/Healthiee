@@ -2,6 +2,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:healthiee/constants.dart';
+import 'package:healthiee/services/Doctor.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:firebase_storage/firebase_storage.dart' as firebase_storage;
 import 'package:path/path.dart' as Path;
@@ -13,9 +14,13 @@ class UpdateDocAccount extends StatefulWidget {
 }
 
 class _UpdateDocAccountState extends State<UpdateDocAccount> {
-  String name, dst, det, dept, licno, qual, imgUrl, email, userType;
+  String name, dst, det, dept, licno, qual, imgUrl, email, userType='Doctor';
   File selectedFile;
-  Image profileImg = Image(image: AssetImage('images/505616.png'), height: 100, width: 100,);
+  Image profileImg = Image(
+    image: AssetImage('images/505616.png'),
+    height: 100,
+    width: 100,
+  );
 
   Future chooseFile() async {
     final pickedFile =
@@ -23,7 +28,11 @@ class _UpdateDocAccountState extends State<UpdateDocAccount> {
     setState(() {
       if (pickedFile != null) {
         selectedFile = File(pickedFile.path);
-        profileImg = Image.file(selectedFile , height: 100, width: 100,);
+        profileImg = Image.file(
+          selectedFile,
+          height: 100,
+          width: 100,
+        );
       }
     });
   }
@@ -73,6 +82,24 @@ class _UpdateDocAccountState extends State<UpdateDocAccount> {
     });
   }
 
+  void updateEntry() async {
+    await FirebaseFirestore.instance.collection('Doctors').doc(email).update({
+      'name': name,
+      'licno': licno,
+      'dept': dept,
+      'dst': dst,
+      'det': det,
+      'qual': qual,
+      'imgUrl': imgUrl
+    });
+  }
+
+  void createNewEntry() async {
+    Doctor doctor =
+        new Doctor(name, licno, dept, dst, det, qual, imgUrl, userType);
+    await doctor.addToCloud();
+  }
+
   @override
   void initState() {
     initializeAllParams();
@@ -81,7 +108,6 @@ class _UpdateDocAccountState extends State<UpdateDocAccount> {
 
   @override
   Widget build(BuildContext context) {
-
     return Scaffold(
       backgroundColor: Colors.white,
       appBar: AppBar(
@@ -187,15 +213,14 @@ class _UpdateDocAccountState extends State<UpdateDocAccount> {
                     await uploadFile();
                     CollectionReference user =
                         FirebaseFirestore.instance.collection('Doctors');
-                    await user.doc(email).update({
-                      'name': name,
-                      'licno': licno,
-                      'dept': dept,
-                      'dst': dst,
-                      'det': det,
-                      'qual': qual,
-                      'imgUrl': imgUrl
+
+                    user.doc(email).get().then((value) {
+                      if (value.exists) {
+                        updateEntry();
+                      } else
+                        createNewEntry();
                     });
+
                     Navigator.pop(context);
                   },
                   child: Text(

@@ -2,6 +2,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:healthiee/constants.dart';
+import 'package:healthiee/services/Patients.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:firebase_storage/firebase_storage.dart' as firebase_storage;
 import 'package:path/path.dart' as Path;
@@ -13,9 +14,13 @@ class UpdatePatAccount extends StatefulWidget {
 }
 
 class _UpdatePatAccountState extends State<UpdatePatAccount> {
-  String name, age, gender, imgUrl, email, userType;
+  String name, age, gender, imgUrl, email, userType = 'Patient';
   File selectedFile;
-  Image profileImg = Image(image: AssetImage('images/505616.png'),height: 100, width: 100,);
+  Image profileImg = Image(
+    image: AssetImage('images/505616.png'),
+    height: 100,
+    width: 100,
+  );
 
   Future chooseFile() async {
     final pickedFile =
@@ -23,7 +28,11 @@ class _UpdatePatAccountState extends State<UpdatePatAccount> {
     setState(() {
       if (pickedFile != null) {
         selectedFile = File(pickedFile.path);
-        profileImg = Image.file(selectedFile,height: 100, width: 100,);
+        profileImg = Image.file(
+          selectedFile,
+          height: 100,
+          width: 100,
+        );
       }
     });
   }
@@ -64,6 +73,19 @@ class _UpdatePatAccountState extends State<UpdatePatAccount> {
         });
       }
     });
+  }
+
+  void UpdateEntry() async {
+    await FirebaseFirestore.instance
+        .collection('Patients')
+        .doc(email)
+        .update({'name': name, 'age': age, 'gender': gender, 'imgUrl': imgUrl});
+  }
+
+  void CreateNew() async {
+    String applNo = email.substring(0, 10);
+    Patient patient = new Patient(name, applNo, gender, imgUrl, age, userType);
+    await patient.addToCloud();
   }
 
   @override
@@ -138,13 +160,13 @@ class _UpdatePatAccountState extends State<UpdatePatAccount> {
                 ElevatedButton(
                   onPressed: () async {
                     await uploadFile();
-                    CollectionReference user =
+                    CollectionReference user = 
                         FirebaseFirestore.instance.collection('Patients');
-                    await user.doc(email).update({
-                      'name': name,
-                      'age': age,
-                      'gender': gender,
-                      'imgUrl': imgUrl
+                    user.doc(email).get().then((value) {
+                      if (value.exists)
+                        UpdateEntry();
+                      else
+                        CreateNew();
                     });
                     Navigator.pop(context);
                   },

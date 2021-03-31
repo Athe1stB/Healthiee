@@ -10,8 +10,7 @@ class Doctor {
       this.imgUrl, this.userType);
 
   Future<bool> addToCloud() async {
-    CollectionReference doclist =
-        FirebaseFirestore.instance.collection('Doctors');
+    CollectionReference doclist = FirebaseFirestore.instance.collection('Doctors');
 
     bool toreturn = true, cond1 = false, cond2 = false;
 
