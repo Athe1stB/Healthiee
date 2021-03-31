@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
 
+String defaultImgUrl =
+    'https://firebasestorage.googleapis.com/v0/b/healthiee-dc5ec.appspot.com/o/profileImg%2FLBCC_logo.png?alt=media&token=afe33eb6-3781-4c74-9ffb-4b1726b92576';
+    
 ThemeData defaultAppTheme = ThemeData(
   iconTheme: IconThemeData(color: Colors.white, size: 30),
   primaryColor: Colors.redAccent,
@@ -19,7 +22,6 @@ ThemeData defaultAppTheme = ThemeData(
   primaryColorDark: Colors.red[900],
   splashColor: Colors.red,
   buttonColor: Colors.red,
-  
 );
 
 TextStyle styleBold = TextStyle(
@@ -117,8 +119,6 @@ TextStyle profileTextBlue = TextStyle(
   fontWeight: FontWeight.bold,
   fontSize: 20,
 );
-
-
 
 InputDecoration createacdec = InputDecoration(
   labelText: 'Name',

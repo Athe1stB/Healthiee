@@ -16,12 +16,12 @@ class CreatePatAccount extends StatefulWidget {
 
 class _CreatePatAccountState extends State<CreatePatAccount> {
   String name, age, gender;
-  String applNo = (FirebaseAuth.instance.currentUser.email.toString()).substring(0, 10);
+  String applNo =
+      (FirebaseAuth.instance.currentUser.email.toString()).substring(0, 10);
   bool isUnique = true;
   File selectedFile;
-  Image profileImg = Image(image: AssetImage('images/505616.png'));
-  String uploadURL =
-      'https://firebasestorage.googleapis.com/v0/b/healthiee.appspot.com/o/profileImg%2Fwp3796963.jpg?alt=media&token=2bd72014-3915-47e6-995c-3426742d40c4';
+  Image profileImg = Image(image: AssetImage('images/505616.png'),height: 100, width: 100,);
+  String uploadURL = defaultImgUrl;
 
   Future chooseFile() async {
     final pickedFile =
@@ -29,10 +29,11 @@ class _CreatePatAccountState extends State<CreatePatAccount> {
     setState(() {
       if (pickedFile != null) {
         selectedFile = File(pickedFile.path);
-        profileImg = Image.file(selectedFile);
+        profileImg = Image.file(selectedFile,height: 100, width: 100,);
       }
     });
   }
+
   void makedef(String fileurl) {
     setState(() {
       uploadURL = fileurl;
@@ -119,7 +120,6 @@ class _CreatePatAccountState extends State<CreatePatAccount> {
                 ),
                 ElevatedButton(
                   onPressed: () async {
-                    
                     await uploadFile();
                     Patient patient = new Patient(
                         name, applNo, gender, uploadURL, age, 'Patient');

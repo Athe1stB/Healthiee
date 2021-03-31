@@ -27,6 +27,8 @@ class ShowDocList extends StatelessWidget {
                 children: snapshot.data.docs.map((DocumentSnapshot document) {
                   return ListTile(
                     leading: Image(
+                      height: 50,
+                      width: 50,
                       image: NetworkImage(document.data()['imgUrl']),
                     ),
                     title: Text(document.data()['name']),

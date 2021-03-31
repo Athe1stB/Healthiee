@@ -20,17 +20,16 @@ class _CreateAdminAccountState extends State<CreateAdminAccount> {
       (FirebaseAuth.instance.currentUser.email.toString()).substring(0, 10);
   bool isUnique = true;
   File selectedFile;
-  Image profileImg = Image(image: AssetImage('images/505616.png'));
-  String uploadURL =
-      'https://firebasestorage.googleapis.com/v0/b/healthiee.appspot.com/o/profileImg%2Fwp3796963.jpg?alt=media&token=2bd72014-3915-47e6-995c-3426742d40c4';
-
+  Image profileImg = Image(image: AssetImage('images/505616.png'),height: 100, width: 100,);
+  String uploadURL = defaultImgUrl;
+  
   Future chooseFile() async {
     final pickedFile =
         await ImagePicker().getImage(source: ImageSource.gallery);
     setState(() {
       if (pickedFile != null) {
         selectedFile = File(pickedFile.path);
-        profileImg = Image.file(selectedFile);
+        profileImg = Image.file(selectedFile,height: 100, width: 100,);
       }
     });
   }

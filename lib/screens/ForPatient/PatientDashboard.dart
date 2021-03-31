@@ -20,8 +20,7 @@ class _PatientDashBoardState extends State<PatientDashBoard> {
       applNo = 'applNo',
       email = 'email',
       nextAppointment = 'None',
-      imgUrl =
-          'https://firebasestorage.googleapis.com/v0/b/healthiee.appspot.com/o/profileImg%2Fimage_picker7515264438939594916.jpg%7D?alt=media&token=a278804a-949e-44d0-8264-7657c1f4a27e',
+      imgUrl = defaultImgUrl,
       userType = 'Patient';
 
   void initializeAllParams() async {

@@ -15,7 +15,7 @@ class UpdateDocAccount extends StatefulWidget {
 class _UpdateDocAccountState extends State<UpdateDocAccount> {
   String name, dst, det, dept, licno, qual, imgUrl, email, userType;
   File selectedFile;
-  Image profileImg = Image(image: AssetImage('images/505616.png'));
+  Image profileImg = Image(image: AssetImage('images/505616.png'), height: 100, width: 100,);
 
   Future chooseFile() async {
     final pickedFile =
@@ -23,7 +23,7 @@ class _UpdateDocAccountState extends State<UpdateDocAccount> {
     setState(() {
       if (pickedFile != null) {
         selectedFile = File(pickedFile.path);
-        profileImg = Image.file(selectedFile);
+        profileImg = Image.file(selectedFile , height: 100, width: 100,);
       }
     });
   }

@@ -15,7 +15,7 @@ class UpdatePatAccount extends StatefulWidget {
 class _UpdatePatAccountState extends State<UpdatePatAccount> {
   String name, age, gender, imgUrl, email, userType;
   File selectedFile;
-  Image profileImg = Image(image: AssetImage('images/505616.png'));
+  Image profileImg = Image(image: AssetImage('images/505616.png'),height: 100, width: 100,);
 
   Future chooseFile() async {
     final pickedFile =
@@ -23,7 +23,7 @@ class _UpdatePatAccountState extends State<UpdatePatAccount> {
     setState(() {
       if (pickedFile != null) {
         selectedFile = File(pickedFile.path);
-        profileImg = Image.file(selectedFile);
+        profileImg = Image.file(selectedFile,height: 100, width: 100,);
       }
     });
   }

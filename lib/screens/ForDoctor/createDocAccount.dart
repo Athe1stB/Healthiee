@@ -16,9 +16,8 @@ class _CreateDocAccountState extends State<CreateDocAccount> {
   String name, dst, det, dept, licno, qual;
   bool isUnique = true;
   File selectedFile;
-  Image profileImg = Image(image: AssetImage('images/505616.png'));
-  String uploadURL =
-      'https://firebasestorage.googleapis.com/v0/b/healthiee.appspot.com/o/profileImg%2Fwp3796963.jpg?alt=media&token=2bd72014-3915-47e6-995c-3426742d40c4';
+  Image profileImg = Image(image: AssetImage('images/505616.png'),height: 100, width: 100,);
+  String uploadURL = defaultImgUrl;
 
   Future chooseFile() async {
     final pickedFile =
@@ -26,7 +25,7 @@ class _CreateDocAccountState extends State<CreateDocAccount> {
     setState(() {
       if (pickedFile != null) {
         selectedFile = File(pickedFile.path);
-        profileImg = Image.file(selectedFile);
+        profileImg = Image.file(selectedFile,height: 100, width: 100,);
       }
     });
   }
@@ -54,7 +53,6 @@ class _CreateDocAccountState extends State<CreateDocAccount> {
 
   @override
   Widget build(BuildContext context) {
-    
     return Scaffold(
       backgroundColor: Colors.white,
       appBar: AppBar(
@@ -168,7 +166,8 @@ class _CreateDocAccountState extends State<CreateDocAccount> {
                       Navigator.push(
                           context,
                           MaterialPageRoute(
-                              builder: (BuildContext context) => DocDashboard()));
+                              builder: (BuildContext context) =>
+                                  DocDashboard()));
                     }
                   },
                   child: Text(
