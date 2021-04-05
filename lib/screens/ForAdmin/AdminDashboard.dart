@@ -4,8 +4,10 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:healthiee/screens/ForAdmin/AddMeds.dart';
 import 'package:healthiee/screens/ForAdmin/AddStaff.dart';
+import 'package:healthiee/screens/ForAdmin/CreateAdminAccount.dart';
 import 'package:healthiee/screens/ForAdmin/showDocList.dart';
 import 'package:healthiee/screens/ForAdmin/showPatientList.dart';
+import 'package:healthiee/screens/ForAdmin/updateAdminAccount.dart';
 import 'package:healthiee/screens/SelectUser.dart';
 
 import '../../constants.dart';
@@ -138,7 +140,8 @@ class _AdminDashboardState extends State<AdminDashboard> {
                         await Navigator.push(
                             context,
                             MaterialPageRoute(
-                                builder: (BuildContext context) => ShowPatientList()));
+                                builder: (BuildContext context) =>
+                                    ShowPatientList()));
                         initializeAllParams();
                       },
                       child: Text(
@@ -150,7 +153,8 @@ class _AdminDashboardState extends State<AdminDashboard> {
                         await Navigator.push(
                             context,
                             MaterialPageRoute(
-                                builder: (BuildContext context) => ShowDocList()));
+                                builder: (BuildContext context) =>
+                                    ShowDocList()));
                         initializeAllParams();
                       },
                       child: Text(
@@ -158,18 +162,37 @@ class _AdminDashboardState extends State<AdminDashboard> {
                       )),
                 ],
               ),
-              ElevatedButton(
-                  onPressed: () async {
-                    FirebaseAuth.instance.signOut();
-                    await Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                            builder: (BuildContext context) => SelectUser()));
-                    SystemNavigator.pop();
-                  },
-                  child: Text(
-                    'Sign Out',
-                  )),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  ElevatedButton(
+                      onPressed: () async {
+                        await Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                                builder: (BuildContext context) =>
+                                    UpdateAdminAccount()));
+                        initializeAllParams();
+                      },
+                      child: Text(
+                        'Update Profile',
+                      )),
+                  VerticalDivider(),
+                  ElevatedButton(
+                      onPressed: () async {
+                        FirebaseAuth.instance.signOut();
+                        await Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                                builder: (BuildContext context) =>
+                                    SelectUser()));
+                        SystemNavigator.pop();
+                      },
+                      child: Text(
+                        'Sign Out',
+                      )),
+                ],
+              ),
             ],
           ),
         ),

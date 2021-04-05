@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:healthiee/constants.dart';
-import 'package:healthiee/screens/ForAdmin/CreateAdminAccount.dart';
-import 'package:healthiee/screens/ForDoctor/createDocAccount.dart';
-import 'package:healthiee/screens/ForPatient/CreatePatAccount.dart';
+import 'package:healthiee/screens/ForAdmin/AdminDashboard.dart';
+import 'package:healthiee/screens/ForDoctor/DocDashboard.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:healthiee/screens/ForPatient/PatientDashboard.dart';
 import 'package:healthiee/services/Admin.dart';
 import 'package:healthiee/services/Doctor.dart';
 import 'package:healthiee/services/Patients.dart';
@@ -126,7 +126,7 @@ class _SignUpPageState extends State<SignUpPage> {
                             context,
                             MaterialPageRoute(
                                 builder: (BuildContext context) =>
-                                    CreateDocAccount()));
+                                    DocDashboard()));
                       } else if (userType.compareTo('Patient') == 0) {
                         Patient patient = Patient('name', 'applNo', 'gender',
                             defaultImgUrl, 'age', userType);
@@ -135,7 +135,7 @@ class _SignUpPageState extends State<SignUpPage> {
                             context,
                             MaterialPageRoute(
                                 builder: (BuildContext context) =>
-                                    CreatePatAccount()));
+                                    PatientDashBoard()));
                       } else {
                         Admin admin =
                             Admin('name', 'accID', defaultImgUrl, userType);
@@ -144,7 +144,7 @@ class _SignUpPageState extends State<SignUpPage> {
                             context,
                             MaterialPageRoute(
                                 builder: (BuildContext context) =>
-                                    CreateAdminAccount()));
+                                    AdminDashboard()));
                       }
                     },
                     child: Text('SignUp')),
