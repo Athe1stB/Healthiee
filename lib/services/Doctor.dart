@@ -1,5 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:healthiee/constants.dart';
 
 class Doctor {
   String name, dst, det, dept, licno, qual, imgUrl, userType;
@@ -10,7 +11,8 @@ class Doctor {
       this.imgUrl, this.userType);
 
   Future<bool> addToCloud() async {
-    CollectionReference doclist = FirebaseFirestore.instance.collection('Doctors');
+    CollectionReference doclist =
+        FirebaseFirestore.instance.collection('Doctors');
 
     bool toreturn = true, cond1 = false, cond2 = false;
 
@@ -31,18 +33,21 @@ class Doctor {
     toreturn = cond1 && cond2;
 
     if (toreturn) {
+      if (name == null) name = 'name';
+      if (imgUrl == null) imgUrl = defaultImgUrl;
+      
       await doclist.doc(email).set({
-          'name': name,
-          'licno': licno,
-          'dept': dept,
-          'det': det,
-          'dst': dst,
-          'qual': qual,
-          'email': email,
-          'imgUrl': imgUrl,
-          'userType': userType,
-          'appointments':[],
-        });
+        'name': name,
+        'licno': licno,
+        'dept': dept,
+        'det': det,
+        'dst': dst,
+        'qual': qual,
+        'email': email,
+        'imgUrl': imgUrl,
+        'userType': userType,
+        'appointments': [],
+      });
     }
 
     return toreturn;

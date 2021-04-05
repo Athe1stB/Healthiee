@@ -31,6 +31,10 @@ class Patient {
     toreturn = cond1 && cond2;
 
     if (toreturn) {
+      
+      if (name == null) name = 'name';
+      if (imgUrl == null) imgUrl = defaultImgUrl;
+      
       await doclist.doc(email).set({
           'name': name,
           'applNo': applNo,
