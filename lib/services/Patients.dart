@@ -1,11 +1,13 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:healthiee/constants.dart';
 
 class Patient {
-  String name, applNo,age,gender, imgUrl, userType, nextAppointment='none';
+  String name, applNo, age, gender, imgUrl, userType, nextAppointment = 'none';
   String email = FirebaseAuth.instance.currentUser.email.toString();
 
-  Patient(this.name, this.applNo, this.gender, this.imgUrl, this.age, this.userType);
+  Patient(this.name, this.applNo, this.gender, this.imgUrl, this.age,
+      this.userType);
 
   Future<bool> addToCloud() async {
     CollectionReference doclist =
@@ -30,16 +32,23 @@ class Patient {
     toreturn = cond1 && cond2;
 
     if (toreturn) {
+      if (name == null) name = 'Patient';
+      if (age == null) age = 'age';
+      if (gender == null) gender = 'gender';
+      if (email == null) email = 'email';
+      if (imgUrl == null) imgUrl = defaultImgUrl;
+      if (userType == null) userType = 'Patient';
+      
       await doclist.doc(email).set({
-          'name': name,
-          'applNo': applNo,
-          'age': age,
-          'gender': gender,
-          'email': email,
-          'imgUrl': imgUrl,
-          'userType': userType,
-          'nextAppointment':nextAppointment,
-        });
+        'name': name,
+        'applNo': applNo,
+        'age': age,
+        'gender': gender,
+        'email': email,
+        'imgUrl': imgUrl,
+        'userType': userType,
+        'nextAppointment': nextAppointment,
+      });
     }
 
     return toreturn;
