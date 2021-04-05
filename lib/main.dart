@@ -34,7 +34,7 @@ class _LoadingState extends State<Loading> {
     if (mAuth.currentUser != null) {
       String emailCurrent = FirebaseAuth.instance.currentUser.email.toString();
       String userType;
-      
+
       //FirebaseAuth.instance.signOut();
 
       CollectionReference docref =
