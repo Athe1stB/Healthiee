@@ -14,7 +14,7 @@ class UpdatePatAccount extends StatefulWidget {
 }
 
 class _UpdatePatAccountState extends State<UpdatePatAccount> {
-  String name, age, gender, imgUrl, email, userType = 'Patient';
+  String name, age, gender, imgUrl = defaultImgUrl, email, userType = 'Patient';
   File selectedFile;
   Image profileImg = Image(
     image: AssetImage('images/505616.png'),

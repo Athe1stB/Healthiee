@@ -11,9 +11,6 @@ import 'package:healthiee/screens/SelectUser.dart';
 import 'package:flutter/services.dart';
 
 void main() {
-  WidgetsFlutterBinding.ensureInitialized();
-  SystemChrome.setPreferredOrientations([DeviceOrientation.portraitUp])
-      .then((_) {
     runApp(
       MaterialApp(
         theme: defaultAppTheme,
@@ -22,7 +19,6 @@ void main() {
         ),
       ),
     );
-  });
 }
 
 class Loading extends StatefulWidget {
