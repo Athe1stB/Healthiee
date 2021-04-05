@@ -35,7 +35,12 @@ class Doctor {
     if (toreturn) {
       if (name == null) name = 'name';
       if (imgUrl == null) imgUrl = defaultImgUrl;
-      
+      if (licno == null) licno = 'licno';
+      if (dept == null) dept = 'dept';
+      if (det == null) det = 'det';
+      if (dst == null) dst = 'dst';
+      if (qual == null) qual = 'qual';
+
       await doclist.doc(email).set({
         'name': name,
         'licno': licno,
@@ -45,7 +50,7 @@ class Doctor {
         'qual': qual,
         'email': email,
         'imgUrl': imgUrl,
-        'userType': userType,
+        'userType': 'Doctor',
         'appointments': [],
       });
     }

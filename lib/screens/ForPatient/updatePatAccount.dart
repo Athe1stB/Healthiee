@@ -75,17 +75,11 @@ class _UpdatePatAccountState extends State<UpdatePatAccount> {
     });
   }
 
-  void UpdateEntry() async {
+  void updateEntry() async {
     await FirebaseFirestore.instance
         .collection('Patients')
         .doc(email)
         .update({'name': name, 'age': age, 'gender': gender, 'imgUrl': imgUrl});
-  }
-
-  void CreateNew() async {
-    String applNo = email.substring(0, 10);
-    Patient patient = new Patient(name, applNo, gender, imgUrl, age, userType);
-    await patient.addToCloud();
   }
 
   @override
@@ -159,16 +153,8 @@ class _UpdatePatAccountState extends State<UpdatePatAccount> {
                 ),
                 ElevatedButton(
                   onPressed: () async {
-                    if(selectedFile!=null)
-                      await uploadFile();
-                    CollectionReference user = 
-                        FirebaseFirestore.instance.collection('Patients');
-                    user.doc(email).get().then((value) {
-                      if (value.exists)
-                        UpdateEntry();
-                      else
-                        CreateNew();
-                    });
+                    if (selectedFile != null) await uploadFile();
+                    updateEntry();
                     Navigator.pop(context);
                   },
                   child: Text(

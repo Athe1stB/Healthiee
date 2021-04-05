@@ -34,11 +34,12 @@ class Patient {
     if (toreturn) {
       if (name == null) name = 'Patient';
       if (age == null) age = 'age';
+      if (applNo== null) applNo = 'applNo';
       if (gender == null) gender = 'gender';
       if (email == null) email = 'email';
       if (imgUrl == null) imgUrl = defaultImgUrl;
       if (userType == null) userType = 'Patient';
-      
+
       await doclist.doc(email).set({
         'name': name,
         'applNo': applNo,

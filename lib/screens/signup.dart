@@ -115,24 +115,25 @@ class _SignUpPageState extends State<SignUpPage> {
                         email: email,
                         password: password,
                       );
-                      if(userType.compareTo('Doctor')==0)
-                      Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                              builder: (BuildContext context) =>
-                                  CreateDocAccount()));
-                      else if(userType.compareTo('Patient')==0)
-                      Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                              builder: (BuildContext context) =>
-                                  CreatePatAccount()));
-                      else
-                      Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                              builder: (BuildContext context) =>
-                                  CreateAdminAccount()));
+                      if (userType.compareTo('Doctor') == 0) {
+                        Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                                builder: (BuildContext context) =>
+                                    CreateDocAccount()));
+                      } else if (userType.compareTo('Patient') == 0) {
+                        Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                                builder: (BuildContext context) =>
+                                    CreatePatAccount()));
+                      } else {
+                        Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                                builder: (BuildContext context) =>
+                                    CreateAdminAccount()));
+                      }
                     },
                     child: Text('SignUp')),
               ],
