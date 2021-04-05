@@ -2,7 +2,6 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:healthiee/constants.dart';
-import 'package:healthiee/services/Doctor.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:firebase_storage/firebase_storage.dart' as firebase_storage;
 import 'package:path/path.dart' as Path;
@@ -14,7 +13,7 @@ class UpdateDocAccount extends StatefulWidget {
 }
 
 class _UpdateDocAccountState extends State<UpdateDocAccount> {
-  String name, dst, det, dept, licno, qual, imgUrl, email, userType='Doctor';
+  String name, dst, det, dept, licno, qual, imgUrl = defaultImgUrl, email, userType = 'Doctor';
   File selectedFile;
   Image profileImg = Image(
     image: AssetImage('images/505616.png'),
@@ -92,12 +91,6 @@ class _UpdateDocAccountState extends State<UpdateDocAccount> {
       'qual': qual,
       'imgUrl': imgUrl
     });
-  }
-
-  void createNewEntry() async {
-    Doctor doctor =
-        new Doctor(name, licno, dept, dst, det, qual, imgUrl, userType);
-    await doctor.addToCloud();
   }
 
   @override
@@ -210,17 +203,8 @@ class _UpdateDocAccountState extends State<UpdateDocAccount> {
                 ),
                 ElevatedButton(
                   onPressed: () async {
-                    if(selectedFile!=null)
-                      await uploadFile();
-                    CollectionReference user =
-                        FirebaseFirestore.instance.collection('Doctors');
-
-                    user.doc(email).get().then((value) {
-                      if (value.exists) {
-                        updateEntry();
-                      } else
-                        createNewEntry();
-                    });
+                    if (selectedFile != null) await uploadFile();
+                    updateEntry();
 
                     Navigator.pop(context);
                   },

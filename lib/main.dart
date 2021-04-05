@@ -71,7 +71,9 @@ class _LoadingState extends State<Loading> {
                 builder: (BuildContext context) => AdminDashboard()));
 
       SystemNavigator.pop();
-    } else {
+    }
+    
+     else {
       await Navigator.push(context,
           MaterialPageRoute(builder: (BuildContext context) => SelectUser()));
       SystemNavigator.pop();

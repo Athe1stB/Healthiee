@@ -33,7 +33,7 @@ class Doctor {
     toreturn = cond1 && cond2;
 
     if (toreturn) {
-      if (name == null) name = 'name';
+      if (name == null) name = 'Doctor';
       if (imgUrl == null) imgUrl = defaultImgUrl;
       if (licno == null) licno = 'licno';
       if (dept == null) dept = 'dept';

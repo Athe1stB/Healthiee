@@ -1,5 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:healthiee/constants.dart';
 
 class Admin {
   String name, accID, imgUrl, userType;
@@ -30,6 +31,13 @@ class Admin {
     toreturn = cond1 && cond2;
 
     if (toreturn) {
+      
+      if (name == null) name = 'Admin';
+      if (accID == null) accID = 'accID';
+      if (email == null) email = 'email';
+      if (imgUrl == null) imgUrl = defaultImgUrl;
+      if (userType == null) userType = 'Admin';
+
       await doclist.doc(email).set({
           'name': name,
           'accID': accID,

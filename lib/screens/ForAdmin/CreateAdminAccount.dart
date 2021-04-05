@@ -90,7 +90,9 @@ class _CreateAdminAccountState extends State<CreateAdminAccount> {
                 ),
                 ElevatedButton(
                   onPressed: () async {
-                    await uploadFile();
+                    if(selectedFile!=null)
+                      await uploadFile();
+                      
                     Admin admin = new Admin(name, accID, uploadURL, 'Admin');
                     bool got = await admin.addToCloud();
                     setState(() {

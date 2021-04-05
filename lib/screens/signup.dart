@@ -4,6 +4,9 @@ import 'package:healthiee/screens/ForAdmin/CreateAdminAccount.dart';
 import 'package:healthiee/screens/ForDoctor/createDocAccount.dart';
 import 'package:healthiee/screens/ForPatient/CreatePatAccount.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:healthiee/services/Admin.dart';
+import 'package:healthiee/services/Doctor.dart';
+import 'package:healthiee/services/Patients.dart';
 // import 'package:fluttertoast/fluttertoast.dart';
 
 class SignUpPage extends StatefulWidget {
@@ -116,18 +119,27 @@ class _SignUpPageState extends State<SignUpPage> {
                         password: password,
                       );
                       if (userType.compareTo('Doctor') == 0) {
+                        Doctor doctor = new Doctor('name', 'licno', 'dept',
+                            'dst', 'det', 'qual', defaultImgUrl, userType);
+                        await doctor.addToCloud();
                         Navigator.push(
                             context,
                             MaterialPageRoute(
                                 builder: (BuildContext context) =>
                                     CreateDocAccount()));
                       } else if (userType.compareTo('Patient') == 0) {
+                        Patient patient = Patient('name', 'applNo', 'gender',
+                            defaultImgUrl, 'age', userType);
+                        await patient.addToCloud();
                         Navigator.push(
                             context,
                             MaterialPageRoute(
                                 builder: (BuildContext context) =>
                                     CreatePatAccount()));
                       } else {
+                        Admin admin =
+                            Admin('name', 'accID', defaultImgUrl, userType);
+                        await admin.addToCloud();
                         Navigator.push(
                             context,
                             MaterialPageRoute(
