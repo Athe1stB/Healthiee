@@ -1,9 +1,8 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:healthiee/constants.dart';
 
 class Patient {
-  String name, applNo, age, gender, imgUrl = defaultImgUrl, userType, nextAppointment='none';
+  String name, applNo,age,gender, imgUrl, userType, nextAppointment='none';
   String email = FirebaseAuth.instance.currentUser.email.toString();
 
   Patient(this.name, this.applNo, this.gender, this.imgUrl, this.age, this.userType);
@@ -31,10 +30,6 @@ class Patient {
     toreturn = cond1 && cond2;
 
     if (toreturn) {
-      
-      if (name == null) name = 'name';
-      if (imgUrl == null) imgUrl = defaultImgUrl;
-      
       await doclist.doc(email).set({
           'name': name,
           'applNo': applNo,
