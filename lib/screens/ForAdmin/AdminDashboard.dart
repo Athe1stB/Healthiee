@@ -4,7 +4,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:healthiee/screens/ForAdmin/AddMeds.dart';
 import 'package:healthiee/screens/ForAdmin/AddStaff.dart';
-import 'package:healthiee/screens/ForAdmin/CreateAdminAccount.dart';
 import 'package:healthiee/screens/ForAdmin/showDocList.dart';
 import 'package:healthiee/screens/ForAdmin/showPatientList.dart';
 import 'package:healthiee/screens/ForAdmin/updateAdminAccount.dart';
