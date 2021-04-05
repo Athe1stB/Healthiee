@@ -210,7 +210,8 @@ class _UpdateDocAccountState extends State<UpdateDocAccount> {
                 ),
                 ElevatedButton(
                   onPressed: () async {
-                    await uploadFile();
+                    if(selectedFile!=null)
+                      await uploadFile();
                     CollectionReference user =
                         FirebaseFirestore.instance.collection('Doctors');
 

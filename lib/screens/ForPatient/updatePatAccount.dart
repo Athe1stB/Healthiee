@@ -159,7 +159,8 @@ class _UpdatePatAccountState extends State<UpdatePatAccount> {
                 ),
                 ElevatedButton(
                   onPressed: () async {
-                    await uploadFile();
+                    if(selectedFile!=null)
+                      await uploadFile();
                     CollectionReference user = 
                         FirebaseFirestore.instance.collection('Patients');
                     user.doc(email).get().then((value) {

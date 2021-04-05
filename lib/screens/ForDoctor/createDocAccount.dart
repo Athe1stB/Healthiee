@@ -155,7 +155,8 @@ class _CreateDocAccountState extends State<CreateDocAccount> {
                 ),
                 ElevatedButton(
                   onPressed: () async {
-                    await uploadFile();
+                    if(selectedFile!=null)
+                      await uploadFile();
                     Doctor newAcc = new Doctor(
                         name, licno, dept, dst, det, qual, uploadURL, 'Doctor');
                     bool got = await newAcc.addToCloud();

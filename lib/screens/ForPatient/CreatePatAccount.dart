@@ -120,7 +120,8 @@ class _CreatePatAccountState extends State<CreatePatAccount> {
                 ),
                 ElevatedButton(
                   onPressed: () async {
-                    await uploadFile();
+                    if(selectedFile!=null)
+                      await uploadFile();
                     Patient patient = new Patient(
                         name, applNo, gender, uploadURL, age, 'Patient');
                     bool got = await patient.addToCloud();
