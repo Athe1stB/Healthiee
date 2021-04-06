@@ -15,7 +15,7 @@ class _AddDonorState extends State<AddDonor> {
   List<ListTile> donors;
 
   void initializeAllParams() async {
-    CollectionReference ref = FirebaseFirestore.instance.collection('Donor');
+    CollectionReference ref = FirebaseFirestore.instance.collection('Donors');
 
     await ref.doc('Donor List').get().then((value) {
       setState(() {
@@ -28,7 +28,7 @@ class _AddDonorState extends State<AddDonor> {
 
   void deleteItem(int i) async {
     CollectionReference doclist =
-        FirebaseFirestore.instance.collection('Donor');
+        FirebaseFirestore.instance.collection('Donors');
 
     donorList.removeAt(i);
 
@@ -60,7 +60,7 @@ class _AddDonorState extends State<AddDonor> {
               style: blueNormalBold,
             ),
           ),
-          subtitle: Text(donorList[i]['donor']),
+          subtitle: Text(donorList[i]['organ']),
           trailing: GestureDetector(
             onTap: () {
               ConfirmAlertBox(

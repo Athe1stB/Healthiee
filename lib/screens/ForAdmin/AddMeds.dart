@@ -113,77 +113,80 @@ class _AddMedsState extends State<AddMeds> {
         ),
       ),
       body: Center(
-        child: Padding(
-          padding: const EdgeInsets.all(16.0),
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.start,
-            children: [
-              TextField(
-                onChanged: (value) {
-                  setState(() {
-                    name = value;
-                  });
-                },
-                style: purpleNormalBold,
-                decoration: InputDecoration(
-                  labelText: 'Name',
-                  labelStyle: normal,
+        child: SingleChildScrollView(
+          child: Padding(
+            padding: const EdgeInsets.all(16.0),
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.start,
+              children: [
+                TextField(
+                  onChanged: (value) {
+                    setState(() {
+                      name = value;
+                    });
+                  },
+                  style: purpleNormalBold,
+                  decoration: InputDecoration(
+                    labelText: 'Name',
+                    labelStyle: normal,
+                  ),
                 ),
-              ),
-              TextField(
-                onChanged: (value) {
-                  setState(() {
-                    qty = value;
-                  });
-                },
-                style: purpleNormalBold,
-                decoration: InputDecoration(
-                  labelText: 'Quantity',
-                  labelStyle: normal,
+                TextField(
+                  onChanged: (value) {
+                    setState(() {
+                      qty = value;
+                    });
+                  },
+                  style: purpleNormalBold,
+                  decoration: InputDecoration(
+                    labelText: 'Quantity',
+                    labelStyle: normal,
+                  ),
                 ),
-              ),
-              TextField(
-                onChanged: (value) {
-                  setState(() {
-                    price = value;
-                  });
-                },
-                style: purpleNormalBold,
-                decoration: InputDecoration(
-                  labelText: 'Price Each',
-                  labelStyle: normal,
+                TextField(
+                  onChanged: (value) {
+                    setState(() {
+                      price = value;
+                    });
+                  },
+                  style: purpleNormalBold,
+                  decoration: InputDecoration(
+                    labelText: 'Price Each',
+                    labelStyle: normal,
+                  ),
                 ),
-              ),
-              TextField(
-                onChanged: (value) {
-                  setState(() {
-                    mfd = value;
-                  });
-                },
-                style: purpleNormalBold,
-                decoration: InputDecoration(
-                  labelText: 'Manufacturing Date',
-                  labelStyle: normal,
+                TextField(
+                  onChanged: (value) {
+                    setState(() {
+                      mfd = value;
+                    });
+                  },
+                  style: purpleNormalBold,
+                  decoration: InputDecoration(
+                    labelText: 'Manufacturing Date',
+                    labelStyle: normal,
+                  ),
                 ),
-              ),
-              ElevatedButton(
-                onPressed: () async {
-                  if (name != null &&
-                      price != null &&
-                      mfd != null &&
-                      qty != null) {
-                    Medicine medicine = new Medicine(name, price, mfd, qty);
-                    await medicine.addToCloud();
-                    initializeAllParams();
-                  }
-                },
-                child: Text('Add/Update'),
-              ),
-              Expanded(
-                  child: ListView(
-                children: ltList,
-              )),
-            ],
+                ElevatedButton(
+                  onPressed: () async {
+                    if (name != null &&
+                        price != null &&
+                        mfd != null &&
+                        qty != null) {
+                      Medicine medicine = new Medicine(name, price, mfd, qty);
+                      await medicine.addToCloud();
+                      initializeAllParams();
+                    }
+                  },
+                  child: Text('Add/Update'),
+                ),
+                Container(
+                    height: 500,
+                    child: ListView(
+                      children: ltList,
+                    )),
+              ],
+            ),
           ),
         ),
       ),
