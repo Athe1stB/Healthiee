@@ -1,15 +1,27 @@
-# healthieee
+# [healthieee](https://healthiee-dc5ec.web.app)
+_An online virtual medical management project._
 
-A new Flutter project.
+<br>
 
-## Getting Started
-This project is a starting point for a Flutter application.
-A few resources to get you started if this is your first Flutter project:
+**Team Members**
+|   Enrollment No.   |         Name         |                       Github ID                         |
+|   --------------   |         ----         |                       --------                          |
+|     IIT2019009     |    Aditya Prakash    | [Seven7teen](https://github.com/Seven7teen)             |
+|     IIT2019010     |    Akshat Baranwal   | [AkshatBaranwal](https://github.com/AkshatBaranwal) | 
+|     IIT2019015     |    Akash Anand       | [akashanand7](https://github.com/akashanand7)           |
+|     IIT2019019     |    Biswajeet Das     | [Athe1stB](https://github.com/Athe1stB)                 |
 
-- [Lab: Write your first Flutter app](https://flutter.dev/docs/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://flutter.dev/docs/cookbook)
+<br>
 
-It is an online virtual medical management project.
+**How To Run**
+```
+git clone https://github.com/Athe1stB/Healthiee.git
+mv Healthiee healthiee
+cd healthiee
+flutter run --release
+```
+
+<br>
 
 ## GETTING INTO THE PROJECT:
 The present world is moving towards the development of online services. In this context, the health care domain can be contributed by developing a web-based online platform that can be used for direct communication or appointments between doctors and patients. With this application, patients can book online appointments with their preferred doctors, and doctors can offer healthcare suggestions, e-prescription, and view the patient’s medical records, lab reports, etc. The application also lets users look for and connect with donors like blood, eye, kidney, etc.
