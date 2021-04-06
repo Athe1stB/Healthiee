@@ -112,77 +112,80 @@ class _AddStaffState extends State<AddStaff> {
         ),
       ),
       body: Center(
-        child: Padding(
-          padding: const EdgeInsets.all(16.0),
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.start,
-            children: [
-              TextField(
-                onChanged: (value) {
-                  setState(() {
-                    name = value;
-                  });
-                },
-                style: purpleNormalBold,
-                decoration: InputDecoration(
-                  labelText: 'Name',
-                  labelStyle: normal,
+        child: SingleChildScrollView(
+          child: Padding(
+            padding: const EdgeInsets.all(16.0),
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.start,
+              children: [
+                TextField(
+                  onChanged: (value) {
+                    setState(() {
+                      name = value;
+                    });
+                  },
+                  style: purpleNormalBold,
+                  decoration: InputDecoration(
+                    labelText: 'Name',
+                    labelStyle: normal,
+                  ),
                 ),
-              ),
-              TextField(
-                onChanged: (value) {
-                  setState(() {
-                    dept = value;
-                  });
-                },
-                style: purpleNormalBold,
-                decoration: InputDecoration(
-                  labelText: 'Department',
-                  labelStyle: normal,
+                TextField(
+                  onChanged: (value) {
+                    setState(() {
+                      dept = value;
+                    });
+                  },
+                  style: purpleNormalBold,
+                  decoration: InputDecoration(
+                    labelText: 'Department',
+                    labelStyle: normal,
+                  ),
                 ),
-              ),
-              TextField(
-                onChanged: (value) {
-                  setState(() {
-                    dst = value;
-                  });
-                },
-                style: purpleNormalBold,
-                decoration: InputDecoration(
-                  labelText: 'Duty Start Time',
-                  labelStyle: normal,
+                TextField(
+                  onChanged: (value) {
+                    setState(() {
+                      dst = value;
+                    });
+                  },
+                  style: purpleNormalBold,
+                  decoration: InputDecoration(
+                    labelText: 'Duty Start Time',
+                    labelStyle: normal,
+                  ),
                 ),
-              ),
-              TextField(
-                onChanged: (value) {
-                  setState(() {
-                    det = value;
-                  });
-                },
-                style: purpleNormalBold,
-                decoration: InputDecoration(
-                  labelText: 'Duty End Time',
-                  labelStyle: normal,
+                TextField(
+                  onChanged: (value) {
+                    setState(() {
+                      det = value;
+                    });
+                  },
+                  style: purpleNormalBold,
+                  decoration: InputDecoration(
+                    labelText: 'Duty End Time',
+                    labelStyle: normal,
+                  ),
                 ),
-              ),
-              ElevatedButton(
-                onPressed: () async {
-                  if (name != null &&
-                      dept != null &&
-                      dst != null &&
-                      det != null) {
-                    Staff staff = new Staff(name, dept, dst, det);
-                    await staff.addToCloud();
-                    initializeAllParams();
-                  }
-                },
-                child: Text('Add/Update'),
-              ),
-              Expanded(
-                  child: ListView(
-                children: ltList,
-              )),
-            ],
+                ElevatedButton(
+                  onPressed: () async {
+                    if (name != null &&
+                        dept != null &&
+                        dst != null &&
+                        det != null) {
+                      Staff staff = new Staff(name, dept, dst, det);
+                      await staff.addToCloud();
+                      initializeAllParams();
+                    }
+                  },
+                  child: Text('Add/Update'),
+                ),
+                Container(
+                    height: 500,
+                    child: ListView(
+                      children: ltList,
+                    )),
+              ],
+            ),
           ),
         ),
       ),

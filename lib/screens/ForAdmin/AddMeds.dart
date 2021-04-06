@@ -167,6 +167,9 @@ class _AddMedsState extends State<AddMeds> {
                     labelStyle: normal,
                   ),
                 ),
+                SizedBox(
+                  height: 10,
+                ),
                 ElevatedButton(
                   onPressed: () async {
                     if (name != null &&

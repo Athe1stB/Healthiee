@@ -95,50 +95,52 @@ class _AddDonorState extends State<AddDonor> {
         ),
       ),
       body: Center(
-        child: Padding(
-          padding: const EdgeInsets.all(16.0),
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.start,
-            children: [
-              TextField(
-                onChanged: (value) {
-                  setState(() {
-                    name = value;
-                  });
-                },
-                style: purpleNormalBold,
-                decoration: InputDecoration(
-                  labelText: 'Name',
-                  labelStyle: normal,
+        child: SingleChildScrollView(
+          child: Padding(
+            padding: const EdgeInsets.all(16.0),
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.start,
+              children: [
+                TextField(
+                  onChanged: (value) {
+                    setState(() {
+                      name = value;
+                    });
+                  },
+                  style: purpleNormalBold,
+                  decoration: InputDecoration(
+                    labelText: 'Name',
+                    labelStyle: normal,
+                  ),
                 ),
-              ),
-              TextField(
-                onChanged: (value) {
-                  setState(() {
-                    organ = value;
-                  });
-                },
-                style: purpleNormalBold,
-                decoration: InputDecoration(
-                  labelText: 'Organ',
-                  labelStyle: normal,
+                TextField(
+                  onChanged: (value) {
+                    setState(() {
+                      organ = value;
+                    });
+                  },
+                  style: purpleNormalBold,
+                  decoration: InputDecoration(
+                    labelText: 'Organ',
+                    labelStyle: normal,
+                  ),
                 ),
-              ),
-              ElevatedButton(
-                onPressed: () async {
-                  if (name != null && organ != null) {
-                    Donor donor = new Donor(name, organ);
-                    await donor.addToCloud();
-                    initializeAllParams();
-                  }
-                },
-                child: Text('Add/Update'),
-              ),
-              Expanded(
-                  child: ListView(
-                children: ltList,
-              )),
-            ],
+                ElevatedButton(
+                  onPressed: () async {
+                    if (name != null && organ != null) {
+                      Donor donor = new Donor(name, organ);
+                      await donor.addToCloud();
+                      initializeAllParams();
+                    }
+                  },
+                  child: Text('Add/Update'),
+                ),Container(
+                      height: 500,
+                      child: ListView(
+                        children: ltList,
+                      )),
+              ],
+            ),
           ),
         ),
       ),
