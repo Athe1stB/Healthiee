@@ -11,14 +11,14 @@ import 'package:healthiee/screens/SelectUser.dart';
 import 'package:flutter/services.dart';
 
 void main() {
-    runApp(
-      MaterialApp(
-        theme: defaultAppTheme,
-        home: Scaffold(
-          body: Center(child: Loading()),
-        ),
+  runApp(
+    MaterialApp(
+      theme: defaultAppTheme,
+      home: Scaffold(
+        body: Center(child: Loading()),
       ),
-    );
+    ),
+  );
 }
 
 class Loading extends StatefulWidget {
@@ -34,8 +34,8 @@ class _LoadingState extends State<Loading> {
     if (mAuth.currentUser != null) {
       String emailCurrent = FirebaseAuth.instance.currentUser.email.toString();
       String userType;
-      
-      //FirebaseAuth.instance.signOut();
+
+      // FirebaseAuth.instance.signOut();
 
       CollectionReference docref =
           FirebaseFirestore.instance.collection('Doctors');
@@ -71,9 +71,7 @@ class _LoadingState extends State<Loading> {
                 builder: (BuildContext context) => AdminDashboard()));
 
       SystemNavigator.pop();
-    }
-    
-     else {
+    } else {
       await Navigator.push(context,
           MaterialPageRoute(builder: (BuildContext context) => SelectUser()));
       SystemNavigator.pop();

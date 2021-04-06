@@ -2,6 +2,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:healthiee/screens/ForAdmin/AddDonor.dart';
 import 'package:healthiee/screens/ForAdmin/AddMeds.dart';
 import 'package:healthiee/screens/ForAdmin/AddStaff.dart';
 import 'package:healthiee/screens/ForAdmin/showDocList.dart';
@@ -179,19 +180,29 @@ class _AdminDashboardState extends State<AdminDashboard> {
                   VerticalDivider(),
                   ElevatedButton(
                       onPressed: () async {
-                        FirebaseAuth.instance.signOut();
                         await Navigator.push(
                             context,
                             MaterialPageRoute(
-                                builder: (BuildContext context) =>
-                                    SelectUser()));
-                        SystemNavigator.pop();
+                                builder: (BuildContext context) => AddDonor()));
+                        initializeAllParams();
                       },
                       child: Text(
-                        'Sign Out',
+                        'Donors',
                       )),
                 ],
               ),
+              ElevatedButton(
+                  onPressed: () async {
+                    FirebaseAuth.instance.signOut();
+                    await Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                            builder: (BuildContext context) => SelectUser()));
+                    SystemNavigator.pop();
+                  },
+                  child: Text(
+                    'Sign Out',
+                  )),
             ],
           ),
         ),
