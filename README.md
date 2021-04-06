@@ -40,7 +40,7 @@ After filling all the details like name,license no., qualifications etc., one mu
 After clicking on Login button on the page(see figure 1.10), a login portal opens with options to enter email and password. Once you have registered, then only one can login.
 Fig 1.40 shows the login portal for doctor.
 
-![] (images/login.jpeg)
+![](images/login.jpeg)
 
 
 Once the doctor clicking the ‘Login’ button, they will be redirected to their own dashboard which is shown in Fig 1.50
