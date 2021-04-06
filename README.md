@@ -45,6 +45,7 @@ Fig 1.40 shows the login portal for doctor.
 
 Once the doctor clicking the ‘Login’ button, they will be redirected to their own dashboard which is shown in Fig 1.50
 
+![](images/doc%20dash.jpeg)
 
 In this page, doctor can see their upcoming appointments which has been booked by the patients. 
 Fig 1.60 shows the appointments of the doctor ‘Ganesh’ which has been booked by the patients ‘Rajesh’ and ‘Rakesh’.
