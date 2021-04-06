@@ -103,6 +103,7 @@ class _AddDonorState extends State<AddDonor> {
               mainAxisAlignment: MainAxisAlignment.start,
               children: [
                 TextField(
+                  key: Key('name'),
                   onChanged: (value) {
                     setState(() {
                       name = value;
@@ -115,6 +116,7 @@ class _AddDonorState extends State<AddDonor> {
                   ),
                 ),
                 TextField(
+                  key: Key('organ'),
                   onChanged: (value) {
                     setState(() {
                       organ = value;

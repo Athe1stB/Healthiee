@@ -120,6 +120,7 @@ class _AddStaffState extends State<AddStaff> {
               mainAxisAlignment: MainAxisAlignment.start,
               children: [
                 TextField(
+                  key: Key('name'),
                   onChanged: (value) {
                     setState(() {
                       name = value;
@@ -132,6 +133,7 @@ class _AddStaffState extends State<AddStaff> {
                   ),
                 ),
                 TextField(
+                  key: Key('dept'),
                   onChanged: (value) {
                     setState(() {
                       dept = value;
@@ -144,6 +146,7 @@ class _AddStaffState extends State<AddStaff> {
                   ),
                 ),
                 TextField(
+                  key: Key('dst'),
                   onChanged: (value) {
                     setState(() {
                       dst = value;
@@ -156,6 +159,7 @@ class _AddStaffState extends State<AddStaff> {
                   ),
                 ),
                 TextField(
+                  key: Key('det'),
                   onChanged: (value) {
                     setState(() {
                       det = value;

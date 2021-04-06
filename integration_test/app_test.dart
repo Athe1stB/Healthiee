@@ -91,9 +91,9 @@ void main() {
 // Staff Details
       await tester.enterText(find.byKey(Key('name')), 'Akash');
       await Future.delayed(Duration(milliseconds: mst));
-      await tester.enterText(find.byKey(Key('department')), 'ENT');
+      await tester.enterText(find.byKey(Key('dept')), 'ENT');
       await Future.delayed(Duration(milliseconds: mst));
-      await tester.enterText(find.byKey(Key('dst')), '9:0');
+      await tester.enterText(find.byKey(Key('dst')), '9:00');
       await Future.delayed(Duration(milliseconds: mst));
       await tester.enterText(find.byKey(Key('det')), '5:00');
       await Future.delayed(Duration(milliseconds: mst));
@@ -133,13 +133,13 @@ void main() {
       await Future.delayed(Duration(milliseconds: mst));
 
 // Delete Patient
-      await tester.tap(find.byKey(Key('0')));
-      await tester.pumpAndSettle();
-      await Future.delayed(Duration(milliseconds: mst));
+      // await tester.tap(find.byKey(Key('0')));
+      // await tester.pumpAndSettle();
+      // await Future.delayed(Duration(milliseconds: mst));
 
-      await tester.tap(find.text('Delete'));
-      await tester.pumpAndSettle();
-      await Future.delayed(Duration(seconds: 2));
+      // await tester.tap(find.text('Delete'));
+      // await tester.pumpAndSettle();
+      // await Future.delayed(Duration(seconds: 2));
 
 // Scroll Test
       await binding.watchPerformance(() async {
@@ -160,13 +160,13 @@ void main() {
       await Future.delayed(Duration(milliseconds: mst));
 
 // Delete Doctor
-      await tester.tap(find.byKey(Key('0')));
-      await tester.pumpAndSettle();
-      await Future.delayed(Duration(milliseconds: mst));
+      // await tester.tap(find.byKey(Key('0')));
+      // await tester.pumpAndSettle();
+      // await Future.delayed(Duration(milliseconds: mst));
 
-      await tester.tap(find.text('Delete'));
-      await tester.pumpAndSettle();
-      await Future.delayed(Duration(seconds: 2));
+      // await tester.tap(find.text('Delete'));
+      // await tester.pumpAndSettle();
+      // await Future.delayed(Duration(seconds: 2));
 
 // Scroll Test
       await binding.watchPerformance(() async {
@@ -193,10 +193,6 @@ void main() {
       await tester.tap(find.byType(ElevatedButton));
       await tester.pumpAndSettle();
       await Future.delayed(Duration(milliseconds: mst));
-
-// Back to Dashboard
-      // await tester.pageBack();
-      // await Future.delayed(Duration(seconds: 2));
 
 // Add Donor
       await tester.tap(find.byKey(Key('addDonor')));

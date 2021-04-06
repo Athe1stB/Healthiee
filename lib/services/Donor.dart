@@ -15,7 +15,7 @@ class Donor {
 
     var donorList = [];
 
-    String addedby = FirebaseAuth.instance.currentUser.email.toString();
+    // String addedby = FirebaseAuth.instance.currentUser.email.toString();
 
     await doclist
         .doc('Donor List')
