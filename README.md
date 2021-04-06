@@ -41,6 +41,7 @@ After clicking on Login button on the page(see figure 1.10), a login portal open
 Fig 1.40 shows the login portal for doctor.
 
 ![](images/login.jpeg)
+                                                                   Fig 1.40
 
 
 Once the doctor clicking the ‘Login’ button, they will be redirected to their own dashboard which is shown in Fig 1.50
