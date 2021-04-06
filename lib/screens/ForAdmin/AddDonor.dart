@@ -62,6 +62,7 @@ class _AddDonorState extends State<AddDonor> {
           ),
           subtitle: Text(donorList[i]['organ']),
           trailing: GestureDetector(
+            key: Key(i.toString()),
             onTap: () {
               ConfirmAlertBox(
                   context: context,
@@ -134,11 +135,12 @@ class _AddDonorState extends State<AddDonor> {
                     }
                   },
                   child: Text('Add/Update'),
-                ),Container(
-                      height: 500,
-                      child: ListView(
-                        children: ltList,
-                      )),
+                ),
+                Container(
+                    height: 500,
+                    child: ListView(
+                      children: ltList,
+                    )),
               ],
             ),
           ),

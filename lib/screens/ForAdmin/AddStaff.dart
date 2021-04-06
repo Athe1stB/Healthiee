@@ -79,6 +79,7 @@ class _AddStaffState extends State<AddStaff> {
             ],
           ),
           trailing: GestureDetector(
+            key: Key(i.toString()),
             onTap: () {
               ConfirmAlertBox(
                   context: context,

@@ -38,7 +38,6 @@ class Donor {
       donorList.add({
         'name': name,
         'organ': organ,
-        'added by': addedby,
       });
     }
 

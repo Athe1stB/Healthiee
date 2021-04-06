@@ -11,14 +11,20 @@ import 'package:healthiee/screens/SelectUser.dart';
 import 'package:flutter/services.dart';
 
 void main() {
-  runApp(
-    MaterialApp(
+  runApp(MyApp());
+}
+
+class MyApp extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return MaterialApp(
+      debugShowCheckedModeBanner: false,
       theme: defaultAppTheme,
       home: Scaffold(
         body: Center(child: Loading()),
       ),
-    ),
-  );
+    );
+  }
 }
 
 
@@ -31,12 +37,12 @@ class _LoadingState extends State<Loading> {
   void initialisefire() async {
     await Firebase.initializeApp();
 
-    FirebaseAuth mAuth = FirebaseAuth.instance;
+    /* FirebaseAuth mAuth = FirebaseAuth.instance;
     if (mAuth.currentUser != null) {
       String emailCurrent = FirebaseAuth.instance.currentUser.email.toString();
       String userType;
 
-      // FirebaseAuth.instance.signOut();
+      FirebaseAuth.instance.signOut();
 
       CollectionReference docref =
           FirebaseFirestore.instance.collection('Doctors');
@@ -76,7 +82,11 @@ class _LoadingState extends State<Loading> {
       await Navigator.push(context,
           MaterialPageRoute(builder: (BuildContext context) => SelectUser()));
       SystemNavigator.pop();
-    }
+    } */
+    FirebaseAuth.instance.signOut();
+    await Navigator.push(context,
+        MaterialPageRoute(builder: (BuildContext context) => SelectUser()));
+    SystemNavigator.pop();
   }
 
   @override

@@ -9,6 +9,9 @@ class ShowDocs extends StatelessWidget {
         FirebaseFirestore.instance.collection('Doctors');
 
     return Scaffold(
+      appBar: AppBar(
+        title: Text('Available Doctors'),
+      ),
       body: Center(
         child: Container(
           child: StreamBuilder<QuerySnapshot>(
@@ -43,7 +46,7 @@ class ShowDocs extends StatelessWidget {
                               .instance.currentUser.email
                               .toString();
 
-                          //update patients next appointment    
+                          //update patients next appointment
                           await FirebaseFirestore.instance
                               .collection('Patients')
                               .doc(curemail)
@@ -52,19 +55,19 @@ class ShowDocs extends StatelessWidget {
 
                           //update docs list
                           String doctorEmail = document.data()['email'];
-                          String name,imgUrl;
+                          String name, imgUrl;
                           List ap = document.data()['appointments'];
-                          await users.doc(doctorEmail).get().then((value){
+                          await users.doc(doctorEmail).get().then((value) {
                             name = value['name'];
                             imgUrl = value['imgUrl'];
                           });
 
                           ap.add({
-                            'Application No': curemail.substring(0,10),
+                            'Application No': curemail.substring(0, 10),
                             'imgUrl': imgUrl,
                             'name': name,
                           });
-                          
+
                           users.doc(doctorEmail).update({
                             'appointments': ap,
                           });

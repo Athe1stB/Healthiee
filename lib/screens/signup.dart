@@ -49,6 +49,7 @@ class _SignUpPageState extends State<SignUpPage> {
             Column(
               children: [
                 TextField(
+                  key: Key('signUp_email'),
                   onChanged: (value) {
                     setState(() {
                       email = value;
@@ -77,6 +78,7 @@ class _SignUpPageState extends State<SignUpPage> {
                 ),
                 SizedBox(height: 10),
                 TextField(
+                  key: Key('signUp_password'),
                   onChanged: (value) {
                     setState(() {
                       password = value;

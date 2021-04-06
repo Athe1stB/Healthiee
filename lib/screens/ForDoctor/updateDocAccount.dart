@@ -13,7 +13,15 @@ class UpdateDocAccount extends StatefulWidget {
 }
 
 class _UpdateDocAccountState extends State<UpdateDocAccount> {
-  String name, dst, det, dept, licno, qual, imgUrl = defaultImgUrl, email, userType = 'Doctor';
+  String name,
+      dst,
+      det,
+      dept,
+      licno,
+      qual,
+      imgUrl = defaultImgUrl,
+      email,
+      userType = 'Doctor';
   File selectedFile;
   Image profileImg = Image(
     image: AssetImage('images/505616.png'),
@@ -124,6 +132,7 @@ class _UpdateDocAccountState extends State<UpdateDocAccount> {
                     },
                     child: Text('Choose image from gallery')),
                 TextField(
+                  key: Key('name'),
                   onChanged: (value) {
                     setState(() {
                       name = value;
@@ -137,6 +146,7 @@ class _UpdateDocAccountState extends State<UpdateDocAccount> {
                   ),
                 ),
                 TextField(
+                  key: Key('licno'),
                   onChanged: (value) {
                     setState(() {
                       licno = value;
@@ -150,6 +160,7 @@ class _UpdateDocAccountState extends State<UpdateDocAccount> {
                   ),
                 ),
                 TextField(
+                  key: Key('dept'),
                   onChanged: (value) {
                     setState(() {
                       dept = value;
@@ -163,6 +174,7 @@ class _UpdateDocAccountState extends State<UpdateDocAccount> {
                   ),
                 ),
                 TextField(
+                  key: Key('qual'),
                   onChanged: (value) {
                     setState(() {
                       qual = value;
@@ -176,6 +188,7 @@ class _UpdateDocAccountState extends State<UpdateDocAccount> {
                   ),
                 ),
                 TextField(
+                  key: Key('dst'),
                   onChanged: (value) {
                     setState(() {
                       dst = value;
@@ -189,6 +202,7 @@ class _UpdateDocAccountState extends State<UpdateDocAccount> {
                   ),
                 ),
                 TextField(
+                  key: Key('det'),
                   onChanged: (value) {
                     setState(() {
                       det = value;

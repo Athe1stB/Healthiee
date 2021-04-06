@@ -132,6 +132,7 @@ class _DocDashboardState extends State<DocDashboard> {
                 ),
               ),
               ElevatedButton(
+                  key: Key('appointments'),
                   onPressed: () {
                     Navigator.push(
                         context,
@@ -146,6 +147,7 @@ class _DocDashboardState extends State<DocDashboard> {
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
                   ElevatedButton(
+                      key: Key('updateProfile'),
                       onPressed: () async {
                         await Navigator.push(
                             context,
@@ -159,6 +161,7 @@ class _DocDashboardState extends State<DocDashboard> {
                       )),
                   VerticalDivider(),
                   ElevatedButton(
+                      key: Key('signOut'),
                       onPressed: () async {
                         FirebaseAuth.instance.signOut();
                         await Navigator.push(

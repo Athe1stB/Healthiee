@@ -4,6 +4,7 @@ import 'package:healthiee/constants.dart';
 import 'package:healthiee/screens/ForAdmin/AdminDashboard.dart';
 import 'package:healthiee/screens/ForDoctor/DocDashboard.dart';
 import 'package:healthiee/screens/ForPatient/PatientDashboard.dart';
+
 class LoginPage extends StatefulWidget {
   final String userType;
   LoginPage(this.userType);
@@ -37,6 +38,7 @@ class _LoginPageState extends State<LoginPage> {
             Column(
               children: [
                 TextField(
+                  key: Key('login_email'),
                   onChanged: (value) {
                     email = value;
                   },
@@ -63,6 +65,7 @@ class _LoginPageState extends State<LoginPage> {
                 ),
                 SizedBox(height: 10),
                 TextField(
+                  key: Key('login_password'),
                   onChanged: (value) {
                     password = value;
                   },
@@ -102,16 +105,24 @@ class _LoginPageState extends State<LoginPage> {
                               email: email, password: password)
                           .then((value) {
                         if (userType.compareTo('Doctor') == 0) {
-                          Navigator.push(context, MaterialPageRoute(builder: (BuildContext context)=>DocDashboard()));
-                        }
-                        else if(userType.compareTo('Patient')==0){
-                          Navigator.push(context, MaterialPageRoute(builder: (BuildContext context)=>PatientDashBoard()));
-                        }
-                        else
-                          Navigator.push(context, MaterialPageRoute(builder: (BuildContext context)=>AdminDashboard()));
-
+                          Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                  builder: (BuildContext context) =>
+                                      DocDashboard()));
+                        } else if (userType.compareTo('Patient') == 0) {
+                          Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                  builder: (BuildContext context) =>
+                                      PatientDashBoard()));
+                        } else
+                          Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                  builder: (BuildContext context) =>
+                                      AdminDashboard()));
                       });
-                      
                     },
                     child: Text('LOGIN')),
               ],

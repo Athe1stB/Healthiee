@@ -92,7 +92,7 @@ class _PatientDashBoardState extends State<PatientDashBoard> {
                       thickness: 2,
                     ),
                     Text(
-                      age+'yrs',
+                      age + 'yrs',
                       style: profileText,
                     ),
                     VerticalDivider(
@@ -128,6 +128,7 @@ class _PatientDashBoardState extends State<PatientDashBoard> {
                 ),
               ),
               ElevatedButton(
+                  key: Key('availableDoctors'),
                   onPressed: () async {
                     await Navigator.push(
                         context,
@@ -142,6 +143,7 @@ class _PatientDashBoardState extends State<PatientDashBoard> {
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
                   ElevatedButton(
+                      key: Key('updateProfile'),
                       onPressed: () async {
                         await Navigator.push(
                             context,
@@ -155,6 +157,7 @@ class _PatientDashBoardState extends State<PatientDashBoard> {
                       )),
                   VerticalDivider(),
                   ElevatedButton(
+                      key: Key('signOut'),
                       onPressed: () async {
                         FirebaseAuth.instance.signOut();
                         await Navigator.push(
