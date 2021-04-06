@@ -41,12 +41,13 @@ After clicking on Login button on the page(see figure 1.10), a login portal open
 Fig 1.40 shows the login portal for doctor.
 
 ![](images/login.jpeg)
-                                                                   Fig 1.40
+Fig 1.40
 
 
 Once the doctor clicking the ‘Login’ button, they will be redirected to their own dashboard which is shown in Fig 1.50
 
 ![](images/doc%20dash.jpeg)
+Fig 1.50
 
 In this page, doctor can see their upcoming appointments which has been booked by the patients. 
 Fig 1.60 shows the list of appointments of the doctor.
@@ -77,6 +78,7 @@ Fig 1.40 shows the login portal for patient which look same as doctor's login po
 Once the patient clicking the ‘Login’ button, they will be redirected to their own dashboard which is shown in Fig 2.40.
 
 ![](images/patient%20dash.jpeg)
+Fig 2.40
 
 The Dashboard page allows patients to perform three operations:
 1) Patient can see their next appointment which has been booked earlier. 
@@ -90,6 +92,7 @@ This module is the heart of our project where an admin can see the list of all p
 
 The patient can login into their account or signup if not already registered. Fig 3.10 shows the page for login and signup option for a admin.
 ![](images/admin%20module.jpeg)
+Fig 3.10
 
 After clicking on Signup button on the page(see figure 3.10), a signup portal opens with options to enter email and password.
 Fig 3.20 shows the signup portal for admin.
@@ -105,12 +108,15 @@ Fig 1.40 shows the login portal for admin looks same as doctors.
 
 Once the admin click on the ‘Login’ button, they will be redirected to their own dashboard which is shown in Fig 3.50.
 ![](images/admin%20dash.jpeg)
+Fig 3.50
 
 The Dashboard page allows admin to perform three operations:
 1) Admin can see the list of medicines available currently and update/add medicines once they are shipped in or sold (see fig 3.60).
 ![](images/medicines.jpeg)
+Fig 3.60
 2) Add staffs / Update details of the staff members (see fig 3.70).
 ![](images/staff.jpeg)
+Fig 3.70
 3) See the list of patients and can remove their account from the software (see fig 3.80).
 4) See the list of doctors and can monitor them (see fig 3.90).
 
