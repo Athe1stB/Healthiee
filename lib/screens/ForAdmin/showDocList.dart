@@ -9,6 +9,9 @@ class ShowDocList extends StatelessWidget {
         FirebaseFirestore.instance.collection('Doctors');
 
     return Scaffold(
+      appBar: AppBar(
+        title: Text('Doctors'),
+      ),
       body: Center(
         child: Container(
           child: StreamBuilder<QuerySnapshot>(
@@ -23,41 +26,43 @@ class ShowDocList extends StatelessWidget {
                 return Text("Loading");
               }
 
-              return ListView(
-                children: snapshot.data.docs.map((DocumentSnapshot document) {
-                  return ListTile(
-                    leading: Image(
-                      height: 50,
-                      width: 50,
-                      image: NetworkImage(document.data()['imgUrl']),
-                    ),
-                    title: Text(document.data()['name']),
-                    subtitle: Text(document.data()['dept']),
-                    trailing: IconButton(
-                        icon: Icon(
-                          Icons.cancel,
-                          color: Colors.red,
-                        ),
-                        onPressed: () {
-                          ConfirmAlertBox(
-                              context: context,
-                              title: 'Delete Entry ?',
-                              infoMessage: 'You cant undo this action.',
-                              titleTextColor: Colors.purple,
-                              buttonTextForYes: 'Back',
-                              buttonTextForNo: 'Delete',
-                              onPressedNo: () async {
-                                await users
-                                    .doc(document.data()['email'])
-                                    .delete();
-                                Navigator.pop(context);
-                              },
-                              onPressedYes: () {
-                                Navigator.pop(context);
-                              });
-                        }),
-                  );
-                }).toList(),
+              return ListView.builder(
+                itemCount: snapshot.data.docs.length,
+                itemBuilder: (ctx, index) => ListTile(
+                  leading: Image(
+                    height: 50,
+                    width: 50,
+                    image: NetworkImage(
+                        snapshot.data.docs[index].data()['imgUrl']),
+                  ),
+                  title: Text(snapshot.data.docs[index].data()['name']),
+                  subtitle: Text(snapshot.data.docs[index].data()['dept']),
+                  trailing: IconButton(
+                      key: Key(index.toString()),
+                      icon: Icon(
+                        Icons.cancel,
+                        color: Colors.red,
+                      ),
+                      onPressed: () {
+                        ConfirmAlertBox(
+                            context: context,
+                            title: 'Delete Entry ?',
+                            infoMessage: 'You cant undo this action.',
+                            titleTextColor: Colors.purple,
+                            buttonTextForYes: 'Back',
+                            buttonTextForNo: 'Delete',
+                            onPressedNo: () async {
+                              await users
+                                  .doc(
+                                      snapshot.data.docs[index].data()['email'])
+                                  .delete();
+                              Navigator.pop(context);
+                            },
+                            onPressedYes: () {
+                              Navigator.pop(context);
+                            });
+                      }),
+                ),
               );
             },
           ),

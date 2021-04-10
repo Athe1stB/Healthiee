@@ -4,6 +4,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:healthiee/constants.dart';
 // import 'package:image_picker/image_picker.dart';
+import 'package:healthiee/services/Patients.dart';
 import 'package:firebase_storage/firebase_storage.dart' as firebase_storage;
 import 'package:path/path.dart' as Path;
 import 'dart:io';
@@ -82,6 +83,12 @@ class _UpdatePatAccountState extends State<UpdatePatAccount> {
         .update({'name': name, 'age': age, 'gender': gender, 'imgUrl': imgUrl});
   }
 
+  void createNew() async {
+    String applNo = email.substring(0, 10);
+    Patient patient = new Patient(name, applNo, gender, imgUrl, age, userType);
+    await patient.addToCloud();
+  }
+
   @override
   void initState() {
     initializeAllParams();
@@ -113,6 +120,7 @@ class _UpdatePatAccountState extends State<UpdatePatAccount> {
                     },
                     child: Text('Choose image from gallery')),
                 TextField(
+                  key: Key('name'),
                   onChanged: (value) {
                     setState(() {
                       name = value;
@@ -126,6 +134,7 @@ class _UpdatePatAccountState extends State<UpdatePatAccount> {
                   ),
                 ),
                 TextField(
+                  key: Key('age'),
                   onChanged: (value) {
                     setState(() {
                       age = value;
@@ -139,6 +148,7 @@ class _UpdatePatAccountState extends State<UpdatePatAccount> {
                   ),
                 ),
                 TextField(
+                  key: Key('gender'),
                   onChanged: (value) {
                     setState(() {
                       gender = value;

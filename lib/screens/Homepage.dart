@@ -18,20 +18,24 @@ class HomePage extends StatelessWidget {
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
             ElevatedButton(
+              key: Key('login'),
               onPressed: () {
                 Navigator.push(
                     context,
                     MaterialPageRoute(
-                        builder: (BuildContext context) => LoginPage(userType)));
+                        builder: (BuildContext context) =>
+                            LoginPage(userType)));
               },
               child: Text('Login'),
             ),
             ElevatedButton(
+              key: Key('signUp'),
               onPressed: () {
                 Navigator.push(
                     context,
                     MaterialPageRoute(
-                        builder: (BuildContext context) => SignUpPage(userType)));
+                        builder: (BuildContext context) =>
+                            SignUpPage(userType)));
               },
               child: Text('SignUp'),
             ),

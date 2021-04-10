@@ -46,6 +46,9 @@ class _ShowDocAppointmentsState extends State<ShowDocAppointments> {
     }
 
     return Scaffold(
+      appBar: AppBar(
+        title: Text('Appointments'),
+      ),
       body: Center(
         child: SingleChildScrollView(
           child: Column(

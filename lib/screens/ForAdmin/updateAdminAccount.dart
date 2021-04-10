@@ -82,10 +82,10 @@ class _UpdateAdminAccountState extends State<UpdateAdminAccount> {
   }
 
   void updateEntry() async {
-    
     await FirebaseFirestore.instance.collection('Admins').doc(email).update({
       'name': name,
-      'accID': (FirebaseAuth.instance.currentUser.email.toString()).substring(0, 10),
+      'accID':
+          (FirebaseAuth.instance.currentUser.email.toString()).substring(0, 10),
       'imgUrl': imgUrl,
     });
   }

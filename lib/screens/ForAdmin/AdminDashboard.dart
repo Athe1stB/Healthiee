@@ -108,6 +108,7 @@ class _AdminDashboardState extends State<AdminDashboard> {
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
                   ElevatedButton(
+                      key: Key('addMeds'),
                       onPressed: () async {
                         await Navigator.push(
                             context,
@@ -120,6 +121,7 @@ class _AdminDashboardState extends State<AdminDashboard> {
                       )),
                   VerticalDivider(),
                   ElevatedButton(
+                      key: Key('addStaff'),
                       onPressed: () async {
                         await Navigator.push(
                             context,
@@ -136,6 +138,7 @@ class _AdminDashboardState extends State<AdminDashboard> {
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
                   ElevatedButton(
+                      key: Key('patientList'),
                       onPressed: () async {
                         await Navigator.push(
                             context,
@@ -149,6 +152,7 @@ class _AdminDashboardState extends State<AdminDashboard> {
                       )),
                   VerticalDivider(),
                   ElevatedButton(
+                      key: Key('doctorList'),
                       onPressed: () async {
                         await Navigator.push(
                             context,
@@ -166,6 +170,7 @@ class _AdminDashboardState extends State<AdminDashboard> {
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
                   ElevatedButton(
+                      key: Key('updateProfile'),
                       onPressed: () async {
                         await Navigator.push(
                             context,
@@ -175,10 +180,11 @@ class _AdminDashboardState extends State<AdminDashboard> {
                         initializeAllParams();
                       },
                       child: Text(
-                        'Update Profile',
+                        'Change Profile',
                       )),
                   VerticalDivider(),
                   ElevatedButton(
+                      key: Key('addDonor'),
                       onPressed: () async {
                         await Navigator.push(
                             context,
@@ -192,6 +198,7 @@ class _AdminDashboardState extends State<AdminDashboard> {
                 ],
               ),
               ElevatedButton(
+                  key: Key('signOut'),
                   onPressed: () async {
                     FirebaseAuth.instance.signOut();
                     await Navigator.push(

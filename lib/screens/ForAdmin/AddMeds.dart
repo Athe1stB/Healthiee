@@ -80,6 +80,7 @@ class _AddMedsState extends State<AddMeds> {
             ],
           ),
           trailing: GestureDetector(
+            key: Key(i.toString()),
             onTap: () {
               ConfirmAlertBox(
                   context: context,
@@ -120,6 +121,7 @@ class _AddMedsState extends State<AddMeds> {
               mainAxisAlignment: MainAxisAlignment.start,
               children: [
                 TextField(
+                  key: Key('name'),
                   onChanged: (value) {
                     setState(() {
                       name = value;
@@ -132,6 +134,7 @@ class _AddMedsState extends State<AddMeds> {
                   ),
                 ),
                 TextField(
+                  key: Key('quantity'),
                   onChanged: (value) {
                     setState(() {
                       qty = value;
@@ -144,6 +147,7 @@ class _AddMedsState extends State<AddMeds> {
                   ),
                 ),
                 TextField(
+                  key: Key('price'),
                   onChanged: (value) {
                     setState(() {
                       price = value;
@@ -156,6 +160,7 @@ class _AddMedsState extends State<AddMeds> {
                   ),
                 ),
                 TextField(
+                  key: Key('date'),
                   onChanged: (value) {
                     setState(() {
                       mfd = value;

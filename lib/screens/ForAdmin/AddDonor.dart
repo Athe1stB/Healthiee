@@ -62,6 +62,7 @@ class _AddDonorState extends State<AddDonor> {
           ),
           subtitle: Text(donorList[i]['organ']),
           trailing: GestureDetector(
+            key: Key(i.toString()),
             onTap: () {
               ConfirmAlertBox(
                   context: context,
@@ -102,6 +103,7 @@ class _AddDonorState extends State<AddDonor> {
               mainAxisAlignment: MainAxisAlignment.start,
               children: [
                 TextField(
+                  key: Key('name'),
                   onChanged: (value) {
                     setState(() {
                       name = value;
@@ -114,6 +116,7 @@ class _AddDonorState extends State<AddDonor> {
                   ),
                 ),
                 TextField(
+                  key: Key('organ'),
                   onChanged: (value) {
                     setState(() {
                       organ = value;
@@ -134,11 +137,12 @@ class _AddDonorState extends State<AddDonor> {
                     }
                   },
                   child: Text('Add/Update'),
-                ),Container(
-                      height: 500,
-                      child: ListView(
-                        children: ltList,
-                      )),
+                ),
+                Container(
+                    height: 500,
+                    child: ListView(
+                      children: ltList,
+                    )),
               ],
             ),
           ),

@@ -9,6 +9,9 @@ class ShowDocs extends StatelessWidget {
         FirebaseFirestore.instance.collection('Doctors');
 
     return Scaffold(
+      appBar: AppBar(
+        title: Text('Available Doctors'),
+      ),
       body: Center(
         child: Container(
           child: StreamBuilder<QuerySnapshot>(
