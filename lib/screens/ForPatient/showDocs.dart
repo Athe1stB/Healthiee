@@ -22,7 +22,7 @@ class ShowDocs extends StatelessWidget {
               if (snapshot.connectionState == ConnectionState.waiting) {
                 return Text("Loading");
               }
-
+              
               return ListView(
                 children: snapshot.data.docs.map((DocumentSnapshot document) {
                   return ListTile(
@@ -43,29 +43,37 @@ class ShowDocs extends StatelessWidget {
                               .instance.currentUser.email
                               .toString();
 
-                          //update patients next appointment    
+                          //update patients next appointment
                           await FirebaseFirestore.instance
                               .collection('Patients')
                               .doc(curemail)
                               .update(
-                                  {'nextAppointment': document.data()['name']});
+                                  {'nextAppointment': document.data()['email']});
 
                           //update docs list
                           String doctorEmail = document.data()['email'];
-                          String name,imgUrl;
+                          String patName, patimgUrl;
                           List ap = document.data()['appointments'];
-                          await users.doc(doctorEmail).get().then((value){
-                            name = value['name'];
-                            imgUrl = value['imgUrl'];
+
+                          String patEmail = FirebaseAuth
+                              .instance.currentUser.email
+                              .toString();
+                          await FirebaseFirestore.instance
+                              .collection('Patients')
+                              .doc(patEmail)
+                              .get()
+                              .then((value) {
+                            patName = value['name'];
+                            patimgUrl = value['imgUrl'];
                           });
 
                           ap.add({
-                            'Application No': curemail.substring(0,10),
-                            'imgUrl': imgUrl,
-                            'name': name,
+                            'Application No': patEmail.substring(0, 10),
+                            'imgUrl': patimgUrl,
+                            'name': patName,
                           });
-                          
-                          users.doc(doctorEmail).update({
+
+                          await users.doc(doctorEmail).update({
                             'appointments': ap,
                           });
                           Navigator.pop(context);

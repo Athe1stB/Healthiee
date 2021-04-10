@@ -3,6 +3,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:healthiee/constants.dart';
+import 'package:healthiee/screens/ForDoctor/SeeReports.dart';
 import 'package:healthiee/screens/ForDoctor/ShowAppointments.dart';
 import 'package:healthiee/screens/ForDoctor/updateDocAccount.dart';
 import 'package:healthiee/screens/SelectUser.dart';
@@ -172,7 +173,18 @@ class _DocDashboardState extends State<DocDashboard> {
                         'Sign Out',
                       )),
                 ],
-              )
+              ),
+              ElevatedButton(
+                      onPressed: () async {
+                        await Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                                builder: (BuildContext context) =>
+                                    SeeReports()));
+                      },
+                      child: Text(
+                        'See Reports',
+                      )),
             ],
           ),
         ),

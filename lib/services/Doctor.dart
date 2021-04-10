@@ -52,6 +52,7 @@ class Doctor {
         'imgUrl': imgUrl,
         'userType': 'Doctor',
         'appointments': [],
+        'reports':[],
       });
     }
 

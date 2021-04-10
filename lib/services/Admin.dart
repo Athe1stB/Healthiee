@@ -33,7 +33,7 @@ class Admin {
     if (toreturn) {
       
       if (name == null) name = 'Admin';
-      if (accID == null) accID = 'accID';
+      if (accID == null) accID = email.substring(0,10);
       if (email == null) email = 'email';
       if (imgUrl == null) imgUrl = defaultImgUrl;
       if (userType == null) userType = 'Admin';

@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:healthiee/constants.dart';
 import 'package:healthiee/screens/ForPatient/updatePatAccount.dart';
+import 'package:healthiee/screens/ForPatient/uploadTestimonials.dart';
 import 'package:healthiee/screens/SelectUser.dart';
 import 'package:healthiee/screens/ForPatient/showDocs.dart';
 
@@ -154,6 +155,13 @@ class _PatientDashBoardState extends State<PatientDashBoard> {
                         'Update Profile',
                       )),
                   VerticalDivider(),
+                  ElevatedButton(onPressed: () async{
+                    await Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                                builder: (BuildContext context) =>
+                                    UploadTestimonials()));
+                  }, child: Text('Send Reports')),
                   ElevatedButton(
                       onPressed: () async {
                         FirebaseAuth.instance.signOut();

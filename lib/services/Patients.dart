@@ -49,6 +49,7 @@ class Patient {
         'imgUrl': imgUrl,
         'userType': userType,
         'nextAppointment': nextAppointment,
+        'reportUrl':'',
       });
     }
 
