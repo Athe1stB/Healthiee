@@ -22,7 +22,10 @@ class _LoginPageState extends State<LoginPage> {
 
     return Scaffold(
       body: Container(
-        color: Colors.orange,
+        decoration: BoxDecoration(
+            image: DecorationImage(
+                image: AssetImage('images/loginPagejpg.jpg'),
+                fit: BoxFit.cover)),
         padding: EdgeInsets.all(10),
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
@@ -90,41 +93,48 @@ class _LoginPageState extends State<LoginPage> {
                       )),
                 ),
                 SizedBox(height: 20),
-                TextButton(
-                    style: ButtonStyle(
-                      backgroundColor: MaterialStateColor.resolveWith(
-                          (states) => Colors.red),
-                      foregroundColor: MaterialStateColor.resolveWith(
-                          (states) => Colors.white),
-                      textStyle: MaterialStateProperty.resolveWith(
-                          (states) => elementwhite),
+                GestureDetector(
+                  onTap: () async {
+                    await FirebaseAuth.instance
+                        .signInWithEmailAndPassword(
+                            email: email, password: password)
+                        .then((value) {
+                      if (userType.compareTo('Doctor') == 0) {
+                        Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                                builder: (BuildContext context) =>
+                                    DocDashboard()));
+                      } else if (userType.compareTo('Patient') == 0) {
+                        Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                                builder: (BuildContext context) =>
+                                    PatientDashBoard()));
+                      } else
+                        Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                                builder: (BuildContext context) =>
+                                    AdminDashboard()));
+                    });
+                  },
+                  child: Card(
+                    color: Colors.transparent,
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(8),
+                      side: BorderSide(width: 2, color: Colors.white),
                     ),
-                    onPressed: () async {
-                      await FirebaseAuth.instance
-                          .signInWithEmailAndPassword(
-                              email: email, password: password)
-                          .then((value) {
-                        if (userType.compareTo('Doctor') == 0) {
-                          Navigator.push(
-                              context,
-                              MaterialPageRoute(
-                                  builder: (BuildContext context) =>
-                                      DocDashboard()));
-                        } else if (userType.compareTo('Patient') == 0) {
-                          Navigator.push(
-                              context,
-                              MaterialPageRoute(
-                                  builder: (BuildContext context) =>
-                                      PatientDashBoard()));
-                        } else
-                          Navigator.push(
-                              context,
-                              MaterialPageRoute(
-                                  builder: (BuildContext context) =>
-                                      AdminDashboard()));
-                      });
-                    },
-                    child: Text('LOGIN')),
+                    child: Container(
+                      color: Colors.transparent,
+                      padding: EdgeInsets.all(16),
+                      child: Text(
+                        'Login',
+                        style: elementwhite,
+                      ),
+                    ),
+                  ),
+                ),
               ],
             ),
           ],

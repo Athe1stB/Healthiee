@@ -34,7 +34,7 @@ class Patient {
     if (toreturn) {
       if (name == null) name = 'Patient';
       if (age == null) age = 'age';
-      if (applNo== null) applNo = 'applNo';
+      if (applNo== null) applNo = email.substring(0,10);
       if (gender == null) gender = 'gender';
       if (email == null) email = 'email';
       if (imgUrl == null) imgUrl = defaultImgUrl;

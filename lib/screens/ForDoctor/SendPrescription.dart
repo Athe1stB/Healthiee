@@ -1,20 +1,47 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_email_sender/flutter_email_sender.dart';
 import 'package:healthiee/constants.dart';
 
-class ShowDocAppointments extends StatefulWidget {
+class SendPrescription extends StatefulWidget {
   @override
-  _ShowDocAppointmentsState createState() => _ShowDocAppointmentsState();
+  _SendPrescriptionState createState() => _SendPrescriptionState();
 }
 
-class _ShowDocAppointmentsState extends State<ShowDocAppointments> {
+class _SendPrescriptionState extends State<SendPrescription> {
   String appointmentCount = '0';
   var patientList = <Map>[];
+
+  void sendEmail(String patEmail, String patName) async {
+    String docEmail = FirebaseAuth.instance.currentUser.email.toString();
+    String docName;
+    await FirebaseFirestore.instance
+        .collection('Doctors')
+        .doc(docEmail)
+        .get()
+        .then((value) {
+          setState(() {
+      docName = value['name'];
+                    });
+    });
+
+    final Email email = Email(
+      body:
+          'Date: ${DateTime.now()}\n Dear $patName,\n Medicines:\n\n Remarks:\n\n',
+      subject: 'Prescription_ Dr.$docName',
+      recipients: [patEmail],
+      isHTML: false,
+    );
+
+    await FlutterEmailSender.send(email);
+  }
 
   void initializeAllParams() async {
     String currentUserEmail =
         FirebaseAuth.instance.currentUser.email.toString();
+    print(currentUserEmail);
     CollectionReference ref = FirebaseFirestore.instance.collection('Doctors');
 
     await ref.doc(currentUserEmail).get().then((value) {
@@ -22,7 +49,6 @@ class _ShowDocAppointmentsState extends State<ShowDocAppointments> {
         setState(() {
           patientList = List.from(value['appointments']);
           appointmentCount = patientList.length.toString();
-          print(patientList);
         });
       }
     });
@@ -50,13 +76,19 @@ class _ShowDocAppointmentsState extends State<ShowDocAppointments> {
         leading: CircleAvatar(
           backgroundImage: NetworkImage(patientList[i]['imgUrl']),
         ),
+        trailing: IconButton(
+          icon: Icon(CupertinoIcons.pen, color: Colors.indigo),
+          onPressed: () async {
+            await sendEmail(patientList[i]['email'], patientList[i]['name']);
+          },
+        ),
       ));
       ltList.add(SizedBox(height: 8));
     }
 
     return Scaffold(
       appBar: AppBar(
-        title: Text('Appointments ($appointmentCount)'),
+        title: Text('My Patients ($appointmentCount)'),
       ),
       body: Center(
         child: SingleChildScrollView(

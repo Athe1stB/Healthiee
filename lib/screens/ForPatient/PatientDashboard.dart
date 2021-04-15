@@ -1,5 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:healthiee/constants.dart';
@@ -56,6 +57,7 @@ class _PatientDashBoardState extends State<PatientDashBoard> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
+        elevation: 0,
         title: Text(
           'Hey $name !',
           style: styleBoldBlackMedium,
@@ -64,63 +66,82 @@ class _PatientDashBoardState extends State<PatientDashBoard> {
       ),
       body: Center(
         child: SingleChildScrollView(
+          padding: EdgeInsets.all(16),
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [
-              CircleAvatar(
-                radius: 50,
-                backgroundImage: NetworkImage(imgUrl),
-              ),
-              Text(
-                name,
-                style: styleBoldBlackMedium,
-              ),
-              Text(
-                email,
-                style: elementgray,
-              ),
-              SizedBox(height: 20),
-              IntrinsicHeight(
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    Text(
-                      applNo,
-                      style: profileText,
-                    ),
-                    VerticalDivider(
-                      thickness: 2,
-                    ),
-                    Text(
-                      age + 'yrs',
-                      style: profileText,
-                    ),
-                    VerticalDivider(
-                      thickness: 2,
-                    ),
-                    Text(
-                      gender,
-                      style: profileText,
-                    ),
-                  ],
+              Card(
+                elevation: 6,
+                shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(16)),
+                color: Colors.lightBlue[900],
+                child: Padding(
+                  padding: const EdgeInsets.only(top: 20, bottom: 20),
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      CircleAvatar(
+                        radius: 70,
+                        backgroundColor: Colors.white,
+                        child: CircleAvatar(
+                          radius: 60,
+                          backgroundImage: NetworkImage(imgUrl),
+                        ),
+                      ),
+                      SizedBox(height: 10),
+                      Text(
+                        name,
+                        style: styleBoldWhiteMedium,
+                      ),
+                      Text(
+                        email,
+                        style: profileEmail,
+                      ),
+                      SizedBox(height: 10),
+                      Divider(color: Colors.lightBlueAccent),
+                      SizedBox(height: 10),
+                      IntrinsicHeight(
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            Patdetails(
+                              parameter: 'Application ID',
+                              value: applNo,
+                            ),
+                            VerticalDivider(
+                              color: Colors.white24,
+                              thickness: 2,
+                            ),
+                            Patdetails(parameter: 'Age', value: age),
+                            VerticalDivider(
+                              color: Colors.white24,
+                              thickness: 2,
+                            ),
+                            Patdetails(parameter: 'Gender', value: gender),
+                          ],
+                        ),
+                      ),
+                      SizedBox(height: 10),
+                      Divider(color: Colors.lightBlueAccent),
+                      SizedBox(height: 10),
+                      Column(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        textBaseline: TextBaseline.alphabetic,
+                        children: [
+                          Text(
+                            'Next Appointment with : ',
+                            style: elementgray,
+                          ),
+                          Text(
+                            nextAppointment,
+                            style: elementwhite,
+                          ),
+                        ],
+                      ),
+                    ],
+                  ),
                 ),
-              ),
-              SizedBox(height: 10),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                crossAxisAlignment: CrossAxisAlignment.baseline,
-                textBaseline: TextBaseline.alphabetic,
-                children: [
-                  Text(
-                    'Next Appointment : ',
-                    style: elementgray,
-                  ),
-                  Text(
-                    nextAppointment,
-                    style: profileTextBlue,
-                  ),
-                ],
               ),
               Container(
                 padding: EdgeInsets.only(left: 36, right: 36),
@@ -128,45 +149,67 @@ class _PatientDashBoardState extends State<PatientDashBoard> {
                   thickness: 2,
                 ),
               ),
-              ElevatedButton(
-                  key: Key('availableDoctors'),
-                  onPressed: () async {
-                    await Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                            builder: (BuildContext context) => ShowDocs()));
-                    initializeAllParams();
-                  },
-                  child: Text(
-                    'Show Available Doctors',
-                  )),
+              Row(
+                children: [
+                  Expanded(
+                    child: GestureDetector(
+                      key: Key('availableDoctors'),
+                      onTap: () async {
+                        await Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                                builder: (BuildContext context) => ShowDocs()));
+                        initializeAllParams();
+                      },
+                      child: DashBoardParamsWidget(
+                        icondata: Icons.supervised_user_circle,
+                        parameter: 'Doctors',
+                        cardColor: Colors.green,
+                      ),
+                    ),
+                  ),
+                  Expanded(
+                    child: GestureDetector(
+                        key: Key('updateProfile'),
+                        onTap: () async {
+                          await Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                  builder: (BuildContext context) =>
+                                      UpdatePatAccount()));
+                          initializeAllParams();
+                        },
+                        child: DashBoardParamsWidget(
+                          icondata: CupertinoIcons.pen,
+                          parameter: 'Update Profile',
+                          cardColor: Colors.yellow[700],
+                        )),
+                  ),
+                ],
+              ),
               Row(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  ElevatedButton(
-                      key: Key('updateProfile'),
-                      onPressed: () async {
+                  Expanded(
+                    child: GestureDetector(
+                      onTap: () async {
                         await Navigator.push(
                             context,
                             MaterialPageRoute(
                                 builder: (BuildContext context) =>
-                                    UpdatePatAccount()));
-                        initializeAllParams();
-                      },
-                      child: Text(
-                        'Update Profile',
-                      )),
-                  VerticalDivider(),
-                  ElevatedButton(onPressed: () async{
-                    await Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                                builder: (BuildContext context) =>
                                     UploadTestimonials()));
-                  }, child: Text('Send Reports')),
-                  ElevatedButton(
+                      },
+                      child: DashBoardParamsWidget(
+                        icondata: Icons.send,
+                        parameter: 'Send Reports',
+                        cardColor: Colors.redAccent,
+                      ),
+                    ),
+                  ),
+                  Expanded(
+                    child: GestureDetector(
                       key: Key('signOut'),
-                      onPressed: () async {
+                      onTap: () async {
                         FirebaseAuth.instance.signOut();
                         await Navigator.push(
                             context,
@@ -175,13 +218,77 @@ class _PatientDashBoardState extends State<PatientDashBoard> {
                                     SelectUser()));
                         SystemNavigator.pop();
                       },
-                      child: Text(
-                        'Sign Out',
-                      )),
+                      child: DashBoardParamsWidget(
+                        icondata: CupertinoIcons.power,
+                        parameter: 'Sign Out',
+                        cardColor: Colors.blueGrey,
+                      ),
+                    ),
+                  ),
                 ],
               )
             ],
           ),
+        ),
+      ),
+    );
+  }
+}
+
+class Patdetails extends StatelessWidget {
+  final String parameter;
+  final String value;
+  Patdetails({this.parameter, this.value});
+
+  @override
+  Widget build(BuildContext context) {
+    return Column(
+      mainAxisAlignment: MainAxisAlignment.center,
+      children: [
+        Text(
+          value,
+          style: profileTextltblue,
+        ),
+        SizedBox(height: 5),
+        Text(
+          parameter,
+          style: TextStyle(color: Colors.white, fontSize: 12, letterSpacing: 1),
+        ),
+      ],
+    );
+  }
+}
+
+class DashBoardParamsWidget extends StatelessWidget {
+  final IconData icondata;
+  final String parameter;
+  final Color cardColor;
+
+  DashBoardParamsWidget({this.icondata, this.parameter, this.cardColor});
+
+  @override
+  Widget build(BuildContext context) {
+    return Card(
+      elevation: 4,
+      shape: RoundedRectangleBorder(
+        borderRadius: BorderRadius.circular(8),
+        // side: BorderSide(width: 2, color: Colors.black),
+      ),
+      color: cardColor,
+      child: Container(
+        padding: EdgeInsets.all(8),
+        child: Column(
+          children: [
+            Icon(
+              icondata,
+              color: Colors.white,
+              size: 50,
+            ),
+            Text(
+              parameter,
+              style: styleCardParamWhite,
+            )
+          ],
         ),
       ),
     );

@@ -4,7 +4,6 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:dio/dio.dart';
 import 'package:flutter_downloader/flutter_downloader.dart';
-import 'package:path_provider/path_provider.dart';
 import 'package:permission_handler/permission_handler.dart';
 import 'package:ext_storage/ext_storage.dart';
 
@@ -15,11 +14,13 @@ class SeeReports extends StatefulWidget {
 
 class _SeeReportsState extends State<SeeReports> {
   bool downloading = false;
+  String reportCount = '0';
   var patients = [];
 
   void make(var list) {
     setState(() {
       patients = list;
+      reportCount = list.length.toString();
     });
     print(patients);
   }
@@ -116,16 +117,20 @@ class _SeeReportsState extends State<SeeReports> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      appBar: AppBar(
+        title: Text('Reports ($reportCount)'),
+      ),
       body: Center(
         child: FutureBuilder(
           future: getPatList(),
           builder: (context, snapshot) {
             if (snapshot.hasData) {
               print(patients);
-              var lt = <ListTile>[];
+              var lt = <Widget>[];
               for (int i = 0; i < patients.length; i++) {
                 lt.add(new ListTile(
-                  leading: Icon(Icons.picture_as_pdf),
+                  tileColor: Colors.yellow,
+                  leading: Icon(Icons.picture_as_pdf, color: Colors.red),
                   title: Text(patients[i]['email']),
                   subtitle: Text(patients[i]['name']),
                   trailing: GestureDetector(
@@ -136,8 +141,10 @@ class _SeeReportsState extends State<SeeReports> {
                     child: Icon(Icons.file_download),
                   ),
                 ));
+                lt.add(SizedBox(height: 8));
               }
               return SingleChildScrollView(
+                padding: EdgeInsets.all(16),
                 child: Column(
                   children: lt,
                 ),

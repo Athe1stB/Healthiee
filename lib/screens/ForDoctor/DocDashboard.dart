@@ -1,9 +1,11 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:healthiee/constants.dart';
 import 'package:healthiee/screens/ForDoctor/SeeReports.dart';
+import 'package:healthiee/screens/ForDoctor/SendPrescription.dart';
 import 'package:healthiee/screens/ForDoctor/ShowAppointments.dart';
 import 'package:healthiee/screens/ForDoctor/updateDocAccount.dart';
 import 'package:healthiee/screens/SelectUser.dart';
@@ -58,6 +60,7 @@ class _DocDashboardState extends State<DocDashboard> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
+        elevation: 0,
         title: Text(
           'Hey Doctor !',
           style: styleBoldBlackMedium,
@@ -66,65 +69,90 @@ class _DocDashboardState extends State<DocDashboard> {
       ),
       body: Center(
         child: SingleChildScrollView(
+          padding: EdgeInsets.all(16),
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [
-              CircleAvatar(
-                radius: 50,
-                backgroundImage: NetworkImage(imgUrl),
-              ),
-              Text(
-                'Dr. ' + name,
-                style: styleBoldBlackMedium,
-              ),
-              Text(
-                email,
-                style: elementgray,
-              ),
-              SizedBox(height: 20),
-              IntrinsicHeight(
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    Text(
-                      licno,
-                      style: profileText,
-                    ),
-                    VerticalDivider(
-                      thickness: 2,
-                    ),
-                    Text(
-                      qual,
-                      style: profileText,
-                    ),
-                    VerticalDivider(
-                      thickness: 2,
-                    ),
-                    Text(
-                      dept,
-                      style: profileText,
-                    ),
-                  ],
+              Card(
+                elevation: 6,
+                shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(16)),
+                color: Colors.lightBlue[900],
+                child: Padding(
+                  padding: const EdgeInsets.only(top: 20, bottom: 20),
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      CircleAvatar(
+                        radius: 70,
+                        backgroundColor: Colors.white,
+                        child: CircleAvatar(
+                          radius: 60,
+                          backgroundImage: NetworkImage(imgUrl),
+                        ),
+                      ),
+                      SizedBox(height: 10),
+                      Text(
+                        'Dr. ' + name,
+                        style: styleBoldWhiteMedium,
+                      ),
+                      Text(
+                        email,
+                        style: profileEmail,
+                      ),
+                      SizedBox(height: 10),
+                      Divider(color: Colors.lightBlueAccent),
+                      SizedBox(height: 10),
+                      IntrinsicHeight(
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            Docdetails(
+                              parameter: 'License',
+                              value: licno,
+                            ),
+                            VerticalDivider(
+                              color: Colors.white24,
+                              thickness: 2,
+                            ),
+                            Docdetails(parameter: 'Qualification', value: qual),
+                            VerticalDivider(
+                              color: Colors.white24,
+                              thickness: 2,
+                            ),
+                            Docdetails(parameter: 'Department', value: dept),
+                          ],
+                        ),
+                      ),
+                      SizedBox(height: 10),
+                      Divider(color: Colors.lightBlueAccent),
+                      SizedBox(height: 10),
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          Icon(
+                            CupertinoIcons.clock_fill,
+                            color: Colors.white70,
+                          ),
+                          SizedBox(width: 6),
+                          Text(
+                            dst,
+                            style: profileTextTime,
+                          ),
+                          Text(
+                            ' - ',
+                            style: profileTextTime,
+                          ),
+                          Text(
+                            det,
+                            style: profileTextTime,
+                          ),
+                        ],
+                      ),
+                    ],
+                  ),
                 ),
-              ),
-              SizedBox(height: 10),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  Text(
-                    dst,
-                    style: profileTextBlue,
-                  ),
-                  Text(
-                    ' - ',
-                    style: profileTextBlue,
-                  ),
-                  Text(
-                    det,
-                    style: profileTextBlue,
-                  ),
-                ],
               ),
               Container(
                 padding: EdgeInsets.only(left: 36, right: 36),
@@ -132,24 +160,30 @@ class _DocDashboardState extends State<DocDashboard> {
                   thickness: 2,
                 ),
               ),
-              ElevatedButton(
-                  key: Key('appointments'),
-                  onPressed: () {
-                    Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                            builder: (BuildContext context) =>
-                                ShowDocAppointments()));
-                  },
-                  child: Text(
-                    'Show Upcoming Appointments',
-                  )),
               Row(
-                mainAxisAlignment: MainAxisAlignment.center,
+                mainAxisAlignment: MainAxisAlignment.spaceAround,
                 children: [
-                  ElevatedButton(
+                  Expanded(
+                    child: GestureDetector(
+                      key: Key('appointments'),
+                      onTap: () {
+                        Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                                builder: (BuildContext context) =>
+                                    ShowDocAppointments()));
+                      },
+                      child: DashBoardParamsWidget(
+                        icondata: CupertinoIcons.calendar_today,
+                        parameter: 'Appointments',
+                        cardColor: Colors.green,
+                      ),
+                    ),
+                  ),
+                  Expanded(
+                    child: GestureDetector(
                       key: Key('updateProfile'),
-                      onPressed: () async {
+                      onTap: () async {
                         await Navigator.push(
                             context,
                             MaterialPageRoute(
@@ -157,12 +191,55 @@ class _DocDashboardState extends State<DocDashboard> {
                                     UpdateDocAccount()));
                         initializeAllParams();
                       },
-                      child: Text(
-                        'Update Profile',
-                      )),
-                  VerticalDivider(),
-                  ElevatedButton(
-                      key: Key('signOut'),
+                      child: DashBoardParamsWidget(
+                        icondata: CupertinoIcons.pen,
+                        parameter: 'Update Profile',
+                        cardColor: Colors.yellow[700],
+                      ),
+                    ),
+                  ),
+                ],
+              ),
+              SizedBox(height: 10),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceAround,
+                children: [
+                  Expanded(
+                    child: GestureDetector(
+                      onTap: () async {
+                        await Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                                builder: (BuildContext context) =>
+                                    SeeReports()));
+                      },
+                      child: DashBoardParamsWidget(
+                        icondata: CupertinoIcons.doc_text,
+                        parameter: 'Reports',
+                        cardColor: Colors.redAccent,
+                      ),
+                    ),
+                  ),
+                  Expanded(
+                    child: GestureDetector(
+                      onTap: () async {
+                        await Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                                builder: (BuildContext context) =>
+                                    SendPrescription()));
+                      },
+                      child: DashBoardParamsWidget(
+                          icondata: CupertinoIcons.square_pencil,
+                          parameter: 'Prescribe',
+                          cardColor: Colors.blueGrey),
+                    ),
+                  ),
+                ],
+              ),
+
+              ElevatedButton(
+                key: Key('signOut'),
                       onPressed: () async {
                         FirebaseAuth.instance.signOut();
                         await Navigator.push(
@@ -172,26 +249,78 @@ class _DocDashboardState extends State<DocDashboard> {
                                     SelectUser()));
                         SystemNavigator.pop();
                       },
-                      child: Text(
-                        'Sign Out',
-                      )),
-                ],
+                      child: Text('Sign Out'),
+              
               ),
-              ElevatedButton(
-                      onPressed: () async {
-                        await Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                                builder: (BuildContext context) =>
-                                    SeeReports()));
-                      },
-                      child: Text(
-                        'See Reports',
-                      )),
+              // SizedBox(height: 10),
+              // ElevatedButton(
+              //   style: dashBoardParams,
+              //
+              // ),
             ],
           ),
         ),
       ),
+    );
+  }
+}
+
+class DashBoardParamsWidget extends StatelessWidget {
+  final IconData icondata;
+  final String parameter;
+  final Color cardColor;
+
+  DashBoardParamsWidget({this.icondata, this.parameter, this.cardColor});
+
+  @override
+  Widget build(BuildContext context) {
+    return Card(
+      elevation: 4,
+      shape: RoundedRectangleBorder(
+        borderRadius: BorderRadius.circular(8),
+        // side: BorderSide(width: 2, color: Colors.black),
+      ),
+      color: cardColor,
+      child: Container(
+        padding: EdgeInsets.all(8),
+        child: Column(
+          children: [
+            Icon(
+              icondata,
+              color: Colors.white,
+              size: 50,
+            ),
+            Text(
+              parameter,
+              style: styleCardParamWhite,
+            )
+          ],
+        ),
+      ),
+    );
+  }
+}
+
+class Docdetails extends StatelessWidget {
+  final String parameter;
+  final String value;
+  Docdetails({this.parameter, this.value});
+
+  @override
+  Widget build(BuildContext context) {
+    return Column(
+      mainAxisAlignment: MainAxisAlignment.center,
+      children: [
+        Text(
+          value,
+          style: profileTextltblue,
+        ),
+        SizedBox(height: 5),
+        Text(
+          parameter,
+          style: TextStyle(color: Colors.white, fontSize: 12, letterSpacing: 1),
+        ),
+      ],
     );
   }
 }

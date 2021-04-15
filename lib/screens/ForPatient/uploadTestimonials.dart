@@ -2,6 +2,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:firebase_storage/firebase_storage.dart' as firebase_storage;
+import 'package:healthiee/constants.dart';
 import 'package:path/path.dart' as Path;
 import 'dart:io';
 import 'package:file_picker/file_picker.dart';
@@ -12,7 +13,7 @@ class UploadTestimonials extends StatefulWidget {
 }
 
 class _UploadTestimonialsState extends State<UploadTestimonials> {
-  String fileName = "none", fileExt = 'pdf';
+  String fileName = "No File Selected", fileExt = 'pdf';
   String patName,
       patEmail = FirebaseAuth.instance.currentUser.email.toString(),
       nextDoc;
@@ -44,6 +45,8 @@ class _UploadTestimonialsState extends State<UploadTestimonials> {
     setState(() {
       selectedFile = file;
       fileSize = file.statSync().size;
+      fileName = 'File Selected';
+      print(file.toString());
       //fileName = file.statSync().toString();
     });
   }
@@ -76,19 +79,46 @@ class _UploadTestimonialsState extends State<UploadTestimonials> {
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 Text(fileName),
-                Text('.' + fileExt),
                 VerticalDivider(),
                 Text((fileSize / 1000).toString() + ' KB'),
               ],
             ),
-            TextButton(
-              onPressed: () async {
+            GestureDetector(
+              onTap: () async {
                 await chooseFile();
               },
-              child: Text('choose PDF'),
+              child: Card(
+                color: Colors.yellow,
+                elevation: 0,
+                shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(8),
+                  side: BorderSide(width: 2, color: Colors.black),
+                ),
+                margin: EdgeInsets.all(30),
+                child: Container(
+                  padding: EdgeInsets.all(8),
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      Icon(
+                        Icons.picture_as_pdf,
+                        color: Colors.red,
+                      ),
+                      VerticalDivider(),
+                      Text(
+                        'Choose PDF',
+                        style: blueNormalBold,
+                      )
+                    ],
+                  ),
+                ),
+              ),
             ),
-            TextButton(
-              onPressed: () async {
+            GestureDetector(
+              onTap: () async {
+                setState(() {
+                  fileName = 'Uploading...';
+                });
                 if (nextDoc.compareTo('none') != 0) {
                   await uploadFile();
                   await FirebaseFirestore.instance
@@ -114,14 +144,39 @@ class _UploadTestimonialsState extends State<UploadTestimonials> {
                   await FirebaseFirestore.instance
                       .collection('Doctors')
                       .doc(nextDoc)
-                      .update({'reports': reportsDoc});
-                  SnackBar(
-                    content: Text('Uploaded success'),
-                    backgroundColor: Colors.red,
-                  );
+                      .update({'reports': reportsDoc}).then((value) {
+                    setState(() {
+                      fileName = 'Uploaded Successfully';
+                    });
+                  });
                 }
               },
-              child: Text('Upload PDF'),
+              child: Card(
+                color: Colors.green,
+                elevation: 0,
+                shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(8),
+                  side: BorderSide(width: 2, color: Colors.black),
+                ),
+                margin: EdgeInsets.symmetric(horizontal: 30),
+                child: Container(
+                  padding: EdgeInsets.all(8),
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      Icon(
+                        Icons.file_upload,
+                        color: Colors.black,
+                      ),
+                      VerticalDivider(),
+                      Text(
+                        'Upload PDF',
+                        style: blueNormalBold,
+                      )
+                    ],
+                  ),
+                ),
+              ),
             ),
           ],
         ),

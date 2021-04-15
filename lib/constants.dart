@@ -2,14 +2,13 @@ import 'package:flutter/material.dart';
 
 String defaultImgUrl =
     'https://firebasestorage.googleapis.com/v0/b/healthiee-dc5ec.appspot.com/o/profileImg%2FLBCC_logo.png?alt=media&token=afe33eb6-3781-4c74-9ffb-4b1726b92576';
-    
+
 ThemeData defaultAppTheme = ThemeData(
   iconTheme: IconThemeData(color: Colors.white, size: 30),
   primaryColor: Colors.redAccent,
   backgroundColor: Colors.white,
-  accentColor: Colors.red,
+  accentColor: Colors.white,
   scaffoldBackgroundColor: Colors.white,
-  cardColor: Colors.purple,
   hintColor: Colors.grey,
   cardTheme: CardTheme(
     color: Color(0xFFE9EEFA),
@@ -48,6 +47,13 @@ TextStyle styleBoldBlack = TextStyle(
   fontWeight: FontWeight.bold,
 );
 
+TextStyle styleCardParamWhite = TextStyle(
+  color: Colors.white,
+  fontSize: 16,
+  letterSpacing: 2,
+  fontWeight: FontWeight.bold,
+);
+
 TextStyle styleBoldBlackMedium = TextStyle(
   color: Colors.black,
   fontSize: 32,
@@ -71,7 +77,15 @@ TextStyle styleBoldWhite = TextStyle(
 
 TextStyle styleBoldWhiteMedium = TextStyle(
   color: Colors.white,
-  fontSize: 30,
+  fontSize: 32,
+  letterSpacing: 2,
+  fontFamily: 'Kanit',
+  fontWeight: FontWeight.bold,
+);
+
+TextStyle styleBoldLtBlueMedium = TextStyle(
+  color: Colors.lightBlueAccent[100],
+  fontSize: 32,
   letterSpacing: 2,
   fontFamily: 'Kanit',
   fontWeight: FontWeight.bold,
@@ -88,11 +102,17 @@ TextStyle normal = TextStyle(
 
 TextStyle elementwhite = TextStyle(
   color: Colors.white,
+  fontFamily: 'Kanit',
   fontSize: 20,
 );
 
 TextStyle elementgray = TextStyle(
   color: Colors.grey,
+  fontSize: 16,
+);
+
+TextStyle profileEmail = TextStyle(
+  color: Colors.white60,
   fontSize: 16,
 );
 
@@ -114,8 +134,26 @@ TextStyle profileText = TextStyle(
   fontSize: 20,
 );
 
+TextStyle profileTextwhite = TextStyle(
+  color: Colors.white,
+  fontWeight: FontWeight.bold,
+  fontSize: 20,
+);
+
+TextStyle profileTextltblue = TextStyle(
+  color: Colors.lightBlue,
+  fontWeight: FontWeight.bold,
+  fontSize: 20,
+);
+
 TextStyle profileTextBlue = TextStyle(
   color: Colors.blue,
+  fontWeight: FontWeight.bold,
+  fontSize: 20,
+);
+
+TextStyle profileTextTime = TextStyle(
+  color: Colors.white70,
   fontWeight: FontWeight.bold,
   fontSize: 20,
 );
@@ -124,6 +162,19 @@ InputDecoration createacdec = InputDecoration(
   labelText: 'Name',
   labelStyle: normal,
   focusColor: Colors.red,
+);
+
+ButtonStyle dashBoardParams = ButtonStyle(
+  elevation: MaterialStateProperty.all(0),
+  padding: MaterialStateProperty.all(EdgeInsets.all(6)),
+  shape: MaterialStateProperty.all(
+      RoundedRectangleBorder(borderRadius: BorderRadius.circular(8),side: BorderSide(width: 2, color: Colors.black)),),
+  backgroundColor: MaterialStateProperty.resolveWith<Color>(
+    (Set<MaterialState> states) {
+      if (states.contains(MaterialState.pressed)) return Colors.orange;
+      return Colors.white; // Use the component's default.
+    },
+  ),
 );
 
 class Constants {}

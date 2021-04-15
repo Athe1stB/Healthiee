@@ -33,8 +33,12 @@ class _SignUpPageState extends State<SignUpPage> {
 
     return Scaffold(
       backgroundColor: Colors.purple,
-      body: Padding(
-        padding: const EdgeInsets.all(18.0),
+      body: Container(
+        padding: EdgeInsets.all(16),
+        decoration: BoxDecoration(
+            image: DecorationImage(
+                image: AssetImage('images/signUpPagejpg.jpg'),
+                fit: BoxFit.cover)),
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           crossAxisAlignment: CrossAxisAlignment.center,
@@ -46,76 +50,69 @@ class _SignUpPageState extends State<SignUpPage> {
             SizedBox(
               height: 50,
             ),
-            Column(
-              children: [
-                TextField(
-                  key: Key('signUp_email'),
-                  onChanged: (value) {
-                    setState(() {
-                      email = value;
-                    });
-                  },
-                  keyboardType: TextInputType.emailAddress,
-                  decoration: InputDecoration(
-                    filled: true,
-                    fillColor: Colors.white,
-                    suffix: Icon(
-                      Icons.edit,
-                      color: Colors.red,
-                      size: 20,
-                    ),
-                    icon: Icon(
-                      Icons.mail_rounded,
-                      size: 40,
-                      color: Colors.white,
-                    ),
-                    hintText: "Enter Email",
-                    hintStyle: TextStyle(
-                      color: Colors.grey,
-                      fontSize: 20,
-                    ),
-                  ),
-                ),
-                SizedBox(height: 10),
-                TextField(
-                  key: Key('signUp_password'),
-                  onChanged: (value) {
-                    setState(() {
-                      password = value;
-                    });
-                  },
-                  keyboardType: TextInputType.visiblePassword,
-                  decoration: InputDecoration(
-                    filled: true,
-                    fillColor: Colors.white,
-                    suffix: Icon(
-                      Icons.edit,
-                      color: Colors.red,
-                      size: 20,
-                    ),
-                    icon: Icon(
-                      Icons.lock_rounded,
-                      size: 40,
-                      color: Colors.white,
-                    ),
-                    hintText: "Enter Password",
-                    hintStyle: TextStyle(
-                      color: Colors.grey,
-                      fontSize: 20,
+            SingleChildScrollView(
+              child: Column(
+                children: [
+                  TextField(
+                    key: Key('signUp_email'),
+                    onChanged: (value) {
+                      setState(() {
+                        email = value;
+                      });
+                    },
+                    keyboardType: TextInputType.emailAddress,
+                    decoration: InputDecoration(
+                      filled: true,
+                      fillColor: Colors.white,
+                      suffix: Icon(
+                        Icons.edit,
+                        color: Colors.white70,
+                        size: 20,
+                      ),
+                      icon: Icon(
+                        Icons.mail_rounded,
+                        size: 40,
+                        color: Colors.white,
+                      ),
+                      hintText: "Enter Email",
+                      hintStyle: TextStyle(
+                        color: Colors.grey,
+                        fontSize: 20,
+                      ),
                     ),
                   ),
-                ),
-                SizedBox(height: 20),
-                TextButton(
-                    style: ButtonStyle(
-                      backgroundColor: MaterialStateColor.resolveWith(
-                          (states) => Colors.pinkAccent),
-                      foregroundColor: MaterialStateColor.resolveWith(
-                          (states) => Colors.white),
-                      textStyle: MaterialStateProperty.resolveWith(
-                          (states) => elementwhite),
+                  SizedBox(height: 20),
+                  TextField(
+                    key: Key('signUp_password'),
+                    onChanged: (value) {
+                      setState(() {
+                        password = value;
+                      });
+                    },
+                    keyboardType: TextInputType.visiblePassword,
+                    decoration: InputDecoration(
+                      filled: true,
+                      fillColor: Colors.white,
+                      suffix: Icon(
+                        Icons.edit,
+                        color: Colors.red,
+                        size: 20,
+                      ),
+                      icon: Icon(
+                        Icons.lock_rounded,
+                        size: 40,
+                        color: Colors.white,
+                      ),
+                      hintText: "Enter Password",
+                      hintStyle: TextStyle(
+                        color: Colors.grey,
+                        fontSize: 20,
+                      ),
                     ),
-                    onPressed: () async {
+                  ),
+                  SizedBox(height: 20),
+                  GestureDetector(
+                    onTap: () async {
                       await mAuth.createUserWithEmailAndPassword(
                         email: email,
                         password: password,
@@ -149,8 +146,24 @@ class _SignUpPageState extends State<SignUpPage> {
                                     AdminDashboard()));
                       }
                     },
-                    child: Text('SignUp')),
-              ],
+                    child: Card(
+                      color: Colors.transparent,
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(8),
+                        side: BorderSide(width: 2, color: Colors.white),
+                      ),
+                      child: Container(
+                        color: Colors.transparent,
+                        padding: EdgeInsets.all(16),
+                        child: Text(
+                          'SignUp',
+                          style: elementwhite,
+                        ),
+                      ),
+                    ),
+                  ),
+                ],
+              ),
             ),
           ],
         ),

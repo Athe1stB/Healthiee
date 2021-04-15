@@ -71,6 +71,7 @@ class ShowDocs extends StatelessWidget {
                           });
 
                           ap.add({
+                            'email' : patEmail,
                             'Application No': patEmail.substring(0, 10),
                             'imgUrl': patimgUrl,
                             'name': patName,
