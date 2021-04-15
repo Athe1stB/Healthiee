@@ -3,7 +3,6 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_email_sender/flutter_email_sender.dart';
-import 'package:healthiee/constants.dart';
 
 class SendPrescription extends StatefulWidget {
   @override
@@ -78,8 +77,8 @@ class _SendPrescriptionState extends State<SendPrescription> {
         ),
         trailing: IconButton(
           icon: Icon(CupertinoIcons.pen, color: Colors.indigo),
-          onPressed: () async {
-            await sendEmail(patientList[i]['email'], patientList[i]['name']);
+          onPressed: () {
+            sendEmail(patientList[i]['email'], patientList[i]['name']);
           },
         ),
       ));

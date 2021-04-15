@@ -45,6 +45,9 @@ flutter:
     - family: Kanit     
       fonts:
         - asset: fonts/Kanit.ttf
+    - family: LuckiestGuy     
+      fonts:
+        - asset: fonts/LuckiestGuy.ttf
   assets:
     - images/
   uses-material-design: true

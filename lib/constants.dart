@@ -37,8 +37,9 @@ TextStyle styleDarkGrayBold = TextStyle(
 
 TextStyle styleBoldWhiteLarge = TextStyle(
   color: Colors.white,
-  fontSize: 70,
+  fontSize: 60,
   fontWeight: FontWeight.bold,
+  fontFamily: 'Kanit'
 );
 
 TextStyle styleBoldBlack = TextStyle(
