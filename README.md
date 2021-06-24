@@ -3,16 +3,6 @@ _An online virtual medical management project._
 
 <br>
 
-**Team Members**
-|   Enrollment No.   |         Name         |                       Github ID                         |
-|   --------------   |         ----         |                       --------                          |
-|     IIT2019009     |    Aditya Prakash    | [Seven7teen](https://github.com/Seven7teen)             |
-|     IIT2019010     |    Akshat Baranwal   | [AkshatBaranwal](https://github.com/AkshatBaranwal) | 
-|     IIT2019015     |    Akash Anand       | [akashanand7](https://github.com/akashanand7)           |
-|     IIT2019019     |    Biswajeet Das     | [Athe1stB](https://github.com/Athe1stB)                 |
-
-<br>
-
 **How To Run**
 ```
 git clone https://github.com/Athe1stB/Healthiee.git
